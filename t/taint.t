@@ -2,9 +2,8 @@
 # Testing Cwd under taint mode.
 
 BEGIN {
-    chdir 't' if -d 't';
     if ($ENV{PERL_CORE}) {
-	@INC = '../lib';
+	@INC = 'lib';
     }
 }
 use Cwd;
