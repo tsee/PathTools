@@ -54,7 +54,6 @@ my $build = $class->new
    license => 'perl',
    installdirs => 'core',
    create_makefile_pl => 'traditional',
-   create_readme => 1,
    requires       => {
 		      'XSLoader' => 0,
 		      'Carp' => 0,
