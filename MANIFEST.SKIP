@@ -8,5 +8,6 @@
 CVS
 ~$
 ^README$
-^FilePathTools
+^PathTools
 (^|/)\.
+^lib/Cwd
