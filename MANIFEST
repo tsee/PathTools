@@ -12,9 +12,11 @@ lib/File/Spec/OS2.pm
 lib/File/Spec/Unix.pm
 lib/File/Spec/VMS.pm
 lib/File/Spec/Win32.pm
+lib/ppport.h
 Makefile.PL
 MANIFEST			This list of files
 META.yml
+ppport.h
 t/crossplatform.t
 t/cwd.t
 t/Functions.t
