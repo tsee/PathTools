@@ -25,7 +25,10 @@ my $EXTRA_ABSPATH_TESTS = ($Config{prefix} =~ m/\//) && $^O ne 'cygwin';
 $tests += 4 if $EXTRA_ABSPATH_TESTS;
 plan tests => $tests;
 
-like $INC{'Cwd.pm'}, qr{blib}i, "Cwd should be loaded from blib/ during testing";
+SKIP: {
+  skip "no need to check for blib/ in the core", 1 if $ENV{PERL_CORE};
+  like $INC{'Cwd.pm'}, qr{blib}i, "Cwd should be loaded from blib/ during testing";
+}
 
 my $IsVMS = $^O eq 'VMS';
 my $IsMacOS = $^O eq 'MacOS';
