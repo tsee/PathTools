@@ -18,11 +18,11 @@ use Cwd;
 ok 1;
 
 my $cdir = getdcwd('C:');
-like $cdir, qr{^C:};
+like $cdir, qr{^C:}i;
 
 my $ddir = getdcwd('D:');
 if (defined $ddir) {
-  like $ddir, qr{^D:};
+  like $ddir, qr{^D:}i;
 } else {
   # May not have a D: drive mounted
   ok 1;
