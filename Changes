@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.04
+3.04  Sun Feb  6 17:27:38 CST 2005
 
  - For perls older than 5.006, the HAS_GETCWD symbol is not available,
    because it wasn't checked for in older Configure scripts when perl
