@@ -304,4 +304,11 @@ abs2rel() and rel2abs() written by Shigio Yamaguchi C<< <shigio@tamacom.com> >>,
 modified by Barrie Slaymaker C<< <barries@slaysys.com> >>.
 splitpath(), splitdir(), catpath() and catdir() by Barrie Slaymaker.
 
+=head1 COPYRIGHT
+
+Copyright (c) 2004 by the Perl 5 Porters.  All rights reserved.
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
 =cut

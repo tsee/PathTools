@@ -147,6 +147,18 @@ Originally by the perl5-porters.
 
 Maintained by Ken Williams <KWILLIAMS@cpan.org>
 
+=head1 COPYRIGHT
+
+Copyright (c) 2004 by the Perl 5 Porters.  All rights reserved.
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+Portions of the C code in this library are copyright (c) 1994 by the
+Regents of the University of California.  All rights reserved.  Please
+see the source code in F<Cwd.xs> for the licensing details of that
+code.
+
 =head1 SEE ALSO
 
 L<File::chdir>

@@ -41,6 +41,9 @@ Revision history for Perl distribution PathTools.
  - abs_path() on Windows was trampling on $ENV{PWD} - fixed. [Spotted
    by Neil MacMullen]
 
+ - Added licensing/copyright statements to the POD in each .pm
+   file. [Spotted by Radoslaw Zielinski]
+
 3.01  Mon Sep  6 22:28:06 CDT 2004
 
  - Removed an unnecessary and confusing dependency on File::Spec from
