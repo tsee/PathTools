@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.01_02  (beta for upcoming 3.02)  Thu Nov 18 22:23:46 CST 2004
+3.01_02  (beta for upcoming 3.02)  Tue Nov 23 22:54:03 CST 2004
 
  - Fixed a testing bug in which sometimes the wrong version of Cwd
    (the version already installed on the user's machine) would get
