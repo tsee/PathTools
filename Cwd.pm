@@ -552,6 +552,7 @@ sub _perl_abs_path
 
 my $Curdir;
 sub fast_abs_path {
+    local $ENV{PWD} = $ENV{PWD} || ''; # Guard against clobberage
     my $cwd = getcwd();
     require File::Spec;
     my $path = @_ ? shift : ($Curdir ||= File::Spec->curdir);
@@ -586,7 +587,6 @@ sub fast_abs_path {
 	  : fast_abs_path(File::Spec->catpath($vol, $dir, '')) . '/' . $file;
     }
 
-    local $ENV{PWD} = $ENV{PWD} || ''; # Guard against clobberage
     if (!CORE::chdir($path)) {
  	_croak("Cannot chdir to $path: $!");
     }
