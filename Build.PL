@@ -40,7 +40,7 @@ my $class = Module::Build->subclass(code => <<'EOF');
     my $v1 = $self->version_from_file('Cwd.pm');
     my $v2 = $self->version_from_file('lib/File/Spec.pm');
     die "Version $v1 from Cwd.pm doesn't match version $v2 from lib/File/Spec.pm"
-      unless $v1 == $v2;
+      unless $v1 eq $v2;
 
     return $self->SUPER::ACTION_distdir(@_);
   }
