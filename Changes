@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.02
+3.02  Sun Jan  9 19:29:52 CST 2005
 
  - Fixed a bug in which Cwd::abs_path() called on a file in the root
    directory returned strange results. [Bob Luckin]
@@ -11,8 +11,6 @@ Revision history for Perl distribution PathTools.
  - Removed the prototype from _perl_abs_path() and the XS version of
    abs_path(), since all they seemed to be doing was causing people
    grief, and since some platforms didn't have them anyway.
-
-3.01_03  (beta for upcoming 3.02)  Mon Nov 29 20:29:09 CST 2004
 
  - Fixed a testing bug in which sometimes the wrong version of Cwd
    (the version already installed on the user's machine) would get
