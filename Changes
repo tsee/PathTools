@@ -1,5 +1,12 @@
 Revision history for Perl distribution PathTools.
 
+3.02
+
+ - Sometimes getdcwd() returns a lower-case drive letter, so don't
+   require an upper-case letter in t/win32.t. [Jan Dubois]
+
+ - Fixed a memory leak in getdcwd() on win32. [Steve Hay]
+
 3.01  Mon Sep  6 22:28:06 CDT 2004
 
  - Removed an unnecessary and confusing dependency on File::Spec from
