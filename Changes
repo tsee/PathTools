@@ -5,6 +5,9 @@ Revision history for Perl distribution PathTools.
  - Added a note to the canonpath() docs about why it doesn't collapse
    foo/../bar sections.
 
+ - bsd_realpath() in the XS file now uses normal arg syntax instead of
+   K&R syntax [Nicholas Clark].
+
 3.05  Mon Feb 28 07:22:58 CST 2005
 
  - Fixed a bug in fast_abs_path() on Win32 in which forward- and
