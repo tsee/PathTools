@@ -21,6 +21,11 @@ Revision history for Perl distribution PathTools.
    lost when I merged it into the PathTools distribution.  They're
    restored now. [Craig A. Berry]
 
+ - File::Spec->canonpath() will now reduce paths like '[d1.-]foo.dat'
+   down to '[000000]foo.dat' instead of '[]foo.dat' or 'foo.dat'.
+   This is in better accordance with the native filename syntax
+   parser. [Craig A. Berry]
+
 3.01  Mon Sep  6 22:28:06 CDT 2004
 
  - Removed an unnecessary and confusing dependency on File::Spec from

@@ -322,6 +322,7 @@ if ($^O eq 'MacOS') {
 [ "VMS->canonpath('[d1.000000.][000000.][d3.--.000000]file.txt')", 	'[d1.000000]file.txt' ],
 [ "VMS->canonpath('volume:[d1.000000.][000000.][-.-.000000]file.txt')",	'volume:[000000]file.txt' ],
 [ "VMS->canonpath('[d1.000000.][000000.][--.-.000000]file.txt')", 	'[-.000000]file.txt' ],
+[ "VMS->canonpath('[d1.d2.--]file')",                                   '[000000]file'       ],
 
 [ "VMS->splitdir('')",            ''          ],
 [ "VMS->splitdir('[]')",          ''          ],
