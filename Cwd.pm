@@ -577,6 +577,7 @@ sub fast_abs_path {
 	return fast_abs_path(File::Spec->catpath($vol, $dir, '')) . '/' . $file;
     }
 
+    local $ENV{PWD} = $ENV{PWD}; # Guard against clobberage
     if (!CORE::chdir($path)) {
  	_croak("Cannot chdir to $path: $!");
     }
