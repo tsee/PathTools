@@ -231,6 +231,12 @@ return FALSE
 #define XSprePUSH (sp = PL_stack_base + ax - 1)
 #endif
 
+#ifndef SV_CWD_ISDOT
+#define SV_CWD_ISDOT(dp) \
+    (dp->d_name[0] == '.' && (dp->d_name[1] == '\0' || \
+        (dp->d_name[1] == '.' && dp->d_name[2] == '\0')))
+#endif
+
 #ifndef getcwd_sv
 /* Taken from perl 5.8's util.c */
 #define getcwd_sv(a) Perl_getcwd_sv(aTHX_ a)
