@@ -20,7 +20,7 @@ use Test::More;
 my $tests = 28;
 # _perl_abs_path() currently only works when the directory separator
 # is '/', so don't test it when it won't work.
-my $EXTRA_ABSPATH_TESTS = ($Config{prefix} =~ m/\//);
+my $EXTRA_ABSPATH_TESTS = ($Config{prefix} =~ m/\//) && $^O ne 'cygwin';
 $tests += 4 if $EXTRA_ABSPATH_TESTS;
 plan tests => $tests;
 
