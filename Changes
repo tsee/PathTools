@@ -1,5 +1,10 @@
 Revision history for Perl distribution PathTools.
 
+3.03
+
+ - Fixed a testing error if the first file we find in the root
+   directory is a symlink. [Blair Zajac]
+
 3.02  Sun Jan  9 19:29:52 CST 2005
 
  - Fixed a bug in which Cwd::abs_path() called on a file in the root
