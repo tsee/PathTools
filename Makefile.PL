@@ -13,8 +13,7 @@ WriteMakefile
                            'File::Basename' => '0',
                            'File::Path' => '0',
                            'Scalar::Util' => '0',
-                           'Test' => '0',
-                           'XSLoader' => '0'
+                           'Test' => '0'
                          },
           'INSTALLDIRS' => 'perl',
           'PL_FILES' => {}

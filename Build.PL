@@ -55,7 +55,6 @@ my $build = $class->new
    installdirs => 'core',
  #  create_makefile_pl => 'traditional',
    requires       => {
-		      'XSLoader' => 0,
 		      'Carp' => 0,
 		      'File::Basename' => 0,
 		     },
