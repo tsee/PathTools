@@ -1,5 +1,4 @@
 package Cwd;
-$VERSION = $VERSION = '3.01_01';
 
 =head1 NAME
 
@@ -156,7 +155,9 @@ L<File::chdir>
 
 use strict;
 use Exporter;
-use vars qw(@ISA @EXPORT @EXPORT_OK);
+use vars qw(@ISA @EXPORT @EXPORT_OK $VERSION);
+
+$VERSION = '3.01_01';
 
 @ISA = qw/ Exporter /;
 @EXPORT = qw(cwd getcwd fastcwd fastgetcwd);
@@ -185,11 +186,15 @@ if ($^O eq 'os2') {
     return 1;
 }
 
-eval {
-    require XSLoader;
-    local $^W = 0;
-    XSLoader::load('Cwd');
-};
+
+if ( $] >= 5.006 ) {
+  require XSLoader;
+  XSLoader::load( __PACKAGE__, $VERSION );
+} else {
+  require DynaLoader;
+  @ISA = 'DynaLoader';
+  __PACKAGE__->bootstrap( $VERSION );
+}
 
 # Big nasty table of function aliases
 my %METHOD_MAP =
@@ -672,7 +677,7 @@ sub _epoc_cwd {
 if (exists $METHOD_MAP{$^O}) {
   my $map = $METHOD_MAP{$^O};
   foreach my $name (keys %$map) {
-    no warnings;	# assignments trigger 'subroutine redefined' warning
+    local $^W = 0;  # assignments trigger 'subroutine redefined' warning
     no strict 'refs';
     *{$name} = \&{$map->{$name}};
   }
