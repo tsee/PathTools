@@ -65,6 +65,7 @@ EOF
 my $build = $class->new
   (
    dist_name => 'PathTools',
+   dist_abstract => 'Tools for working with paths and file specs across platforms',
    dist_version_from => 'Cwd.pm',
    license => 'perl',
    installdirs => 'core',
