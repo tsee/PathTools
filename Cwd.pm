@@ -155,9 +155,10 @@ This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 Portions of the C code in this library are copyright (c) 1994 by the
-Regents of the University of California.  All rights reserved.  Please
-see the source code in F<Cwd.xs> for the licensing details of that
-code.
+Regents of the University of California.  All rights reserved.  The
+license on this code is compatible with the licensing of the rest of
+the distribution - please see the source code in F<Cwd.xs> for the
+details.
 
 =head1 SEE ALSO
 
