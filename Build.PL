@@ -33,6 +33,15 @@ my $class = Module::Build->subclass(code => <<'EOF');
     return { map {$_, $prereqs->{$_}} grep !/^Module::Build$/, keys %$prereqs };
   }
 
+  sub ACTION_build {
+    my $self = shift;
+    my $ppp = 'ppport.h';
+    my $lib_ppp = File::Spec->catfile('lib', $ppp);
+    $self->copy_if_modified(from => $ppp, to => $lib_ppp);
+    $self->add_to_cleanup($lib_ppp);
+    $self->SUPER::ACTION_build(@_);
+  }
+
   # Make sure the two main $VERSION numbers agree.  This is just a
   # simple way of making sure both VERSIONs get updated with every release.
   sub ACTION_distdir {

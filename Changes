@@ -1,5 +1,11 @@
 Revision history for Perl distribution PathTools.
 
+3.04
+
+ - Remove lib/ppport.h from the distribution, so that MakeMaker
+   doesn't accidentally pick it up and install it as a lib
+   file. [Jerry Hedden]
+
 3.03  Fri Jan 21 21:44:05 CST 2005
 
  - Fixed a testing error if the first file we find in the root

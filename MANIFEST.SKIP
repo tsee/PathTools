@@ -11,3 +11,4 @@ CVS
 ^PathTools
 (^|/)\.
 ^lib/Cwd
+^lib/ppp
