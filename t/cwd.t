@@ -16,7 +16,7 @@ use File::Path;
 
 use Test::More;
 
-my $tests = 24;
+my $tests = 25;
 my $EXTRA_ABSPATH_TESTS = $ENV{PERL_CORE} || $ENV{TEST_PERL_CWD_CODE};
 # _perl_abs_path() currently only works when the directory separator
 # is '/', so don't test it when it won't work.
@@ -134,6 +134,15 @@ rmtree($test_dirs[0], 0, 0);
 			  qr|\bt$| );
   
   like($ENV{PWD}, $check);
+}
+
+{
+  # Make sure abs_path() doesn't trample $ENV{PWD}
+  my $start_pwd = $ENV{PWD};
+  mkpath([$Test_Dir], 0, 0777);
+  Cwd::abs_path($Test_Dir);
+  is $ENV{PWD}, $start_pwd;
+  rmtree($test_dirs[0], 0, 0);
 }
 
 SKIP: {
