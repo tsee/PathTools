@@ -30,6 +30,13 @@ path. On UNIX eliminates successive slashes and successive "/.".
 
     $cpath = File::Spec->canonpath( $path ) ;
 
+Note that this does *not* collapse F<x/../y> sections into F<y>.  This
+is by design.  If F</foo> on your system is a symlink to F</bar/baz>,
+then F</foo/../quux> is actually F</bar/quux>, not F</quux> as a naive
+F<../>-removal would give you.  If you want to do this kind of
+processing, you probably want C<Cwd>'s C<realpath()> function to
+actually traverse the filesystem cleaning up paths like this.
+
 =cut
 
 sub canonpath {

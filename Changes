@@ -1,5 +1,10 @@
 Revision history for Perl distribution PathTools.
 
+3.06
+
+ - Added a note to the canonpath() docs about why it doesn't collapse
+   foo/../bar sections.
+
 3.05  Mon Feb 28 07:22:58 CST 2005
 
  - Fixed a bug in fast_abs_path() on Win32 in which forward- and
