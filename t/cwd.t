@@ -18,7 +18,7 @@ use lib File::Spec->catdir('t', 'lib');
 use Test::More;
 
 my $tests = 25;
-my $EXTRA_ABSPATH_TESTS = $ENV{PERL_CORE} || $ENV{TEST_PERL_CWD_CODE};
+my $EXTRA_ABSPATH_TESTS = $ENV{PERL_CORE} || $ENV{TEST_PERL_CWD_CODE} || 0;
 # _perl_abs_path() currently only works when the directory separator
 # is '/', so don't test it when it won't work.
 $EXTRA_ABSPATH_TESTS &&= $Config{prefix} =~ m/\//;
