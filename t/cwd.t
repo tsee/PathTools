@@ -2,13 +2,15 @@
 
 BEGIN {
     if ($ENV{PERL_CORE}) {
-        @INC = 'lib';
+        chdir 't';
+        @INC = '../lib';
     }
 }
 use Cwd;
+chdir 't';
 
-use Config;
 use strict;
+use Config;
 use File::Spec;
 use File::Path;
 
@@ -98,9 +100,8 @@ SKIP: {
     }
 }
 
-my @test_dirs = qw{t _ptrslt_ _path_ _to_ _a_ _dir_};
+my @test_dirs = qw{_ptrslt_ _path_ _to_ _a_ _dir_};
 my $Test_Dir     = File::Spec->catdir(@test_dirs);
-my $To_Remove    = File::Spec->catdir(@test_dirs[0,1]);
 
 mkpath([$Test_Dir], 0, 0777);
 Cwd::chdir $Test_Dir;
@@ -114,10 +115,18 @@ foreach my $func (qw(cwd getcwd fastcwd fastgetcwd)) {
 # Cwd::chdir should also update $ENV{PWD}
 dir_ends_with( $ENV{PWD}, $Test_Dir, 'Cwd::chdir() updates $ENV{PWD}' );
 my $updir = File::Spec->updir;
-for(1..@test_dirs-1) {
-  Cwd::chdir $updir;
-  print "#$ENV{PWD}\n";
-}
+Cwd::chdir $updir;
+print "#$ENV{PWD}\n";
+Cwd::chdir $updir;
+print "#$ENV{PWD}\n";
+Cwd::chdir $updir;
+print "#$ENV{PWD}\n";
+Cwd::chdir $updir;
+print "#$ENV{PWD}\n";
+Cwd::chdir $updir;
+print "#$ENV{PWD}\n";
+
+rmtree($test_dirs[0], 0, 0);
 
 {
   my $check = ($IsVMS   ? qr|\b((?i)t)\]$| :
@@ -127,12 +136,6 @@ for(1..@test_dirs-1) {
   like($ENV{PWD}, $check);
 }
 
-Cwd::chdir $updir;
-print "#$ENV{PWD}\n";
-
-rmtree($To_Remove, 0, 0);
-
-
 SKIP: {
     skip "no symlinks on this platform", 2+$EXTRA_ABSPATH_TESTS unless $Config{d_symlink};
 
@@ -141,13 +144,13 @@ SKIP: {
 
     my $abs_path      =  Cwd::abs_path("linktest");
     my $fast_abs_path =  Cwd::fast_abs_path("linktest");
-    my $want          =  $Test_Dir;
+    my $want          =  File::Spec->catdir("t", $Test_Dir);
 
     like($abs_path,      qr|$want$|);
     like($fast_abs_path, qr|$want$|);
     like(Cwd::_perl_abs_path("linktest"), qr|$want$|) if $EXTRA_ABSPATH_TESTS;
 
-    rmtree($To_Remove, 0, 0);
+    rmtree($test_dirs[0], 0, 0);
     unlink "linktest";
 }
 
@@ -157,13 +160,13 @@ if ($ENV{PERL_CORE}) {
 }
 
 # Make sure we can run abs_path() on files, not just directories
-my $path = File::Spec->catfile('t', 'cwd.t');
+my $path = 'cwd.t';
 path_ends_with(Cwd::abs_path($path), 'cwd.t', 'abs_path() can be invoked on a file');
 path_ends_with(Cwd::fast_abs_path($path), 'cwd.t', 'fast_abs_path() can be invoked on a file');
 path_ends_with(Cwd::_perl_abs_path($path), 'cwd.t', '_perl_abs_path() can be invoked on a file')
   if $EXTRA_ABSPATH_TESTS;
 
-$path = File::Spec->catfile('t', File::Spec->updir, $path);
+$path = File::Spec->catfile(File::Spec->updir, 't', $path);
 path_ends_with(Cwd::abs_path($path), 'cwd.t', 'abs_path() can be invoked on a file');
 path_ends_with(Cwd::fast_abs_path($path), 'cwd.t', 'fast_abs_path() can be invoked on a file');
 path_ends_with(Cwd::_perl_abs_path($path), 'cwd.t', '_perl_abs_path() can be invoked on a file')

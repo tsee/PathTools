@@ -3,10 +3,12 @@
 
 BEGIN {
     if ($ENV{PERL_CORE}) {
-	@INC = 'lib';
+        chdir 't';
+        @INC = '../lib';
     }
 }
 use Cwd;
+chdir 't';
 
 use strict;
 use Test::More tests => 16;

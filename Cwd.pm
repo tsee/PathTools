@@ -344,7 +344,7 @@ sub getcwd
 # This is a faster version of getcwd.  It's also more dangerous because
 # you might chdir out of a directory that you can't chdir back into.
     
-sub fastcwd {
+sub fastcwd_ {
     my($odev, $oino, $cdev, $cino, $tdev, $tino);
     my(@path, $path);
     local(*DIR);
@@ -382,6 +382,7 @@ sub fastcwd {
 	if $cdev != $orig_cdev || $cino != $orig_cino;
     $path;
 }
+if (not defined &fastcwd) { *fastcwd = \&fastcwd_ }
 
 
 # Keeps track of current working directory in PWD environment var
