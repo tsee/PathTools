@@ -1,4 +1,4 @@
-#!./perl
+#!./perl -w
 
 BEGIN {
     chdir 't' if -d 't';
@@ -10,7 +10,6 @@ use Cwd;
 
 use Config;
 use strict;
-use warnings;
 use File::Spec;
 use File::Path;
 
