@@ -3,14 +3,10 @@
 # Here we make sure File::Spec can properly deal with executables.
 # VMS has some trouble with these.
 
-use Test;
-BEGIN {
-    unless (-x $^X) {
-	print "1..0 # Skipped: Can't find an executable file\n";
-	exit;
-    }
-    plan tests => 5;
-}
+use Test::More (-x $^X
+		? (tests => 5)
+		: (skip_all => "Can't find an executable file")
+	       );
 
 BEGIN {                                # Set up a tiny script file
     local *F;
@@ -60,16 +56,16 @@ sub sayok{
 print "# Checking manipulations of \$^X=$^X\n";
 
 my $perl = safe_rel($^X);
-ok( sayok($perl), "ok\n",   "`$perl rel2abs2rel$$.pl` works" );
+is( sayok($perl), "ok\n",   "`$perl rel2abs2rel$$.pl` works" );
 
 $perl = File::Spec->rel2abs($^X);
-ok( sayok($perl), "ok\n",   "`$perl rel2abs2rel$$.pl` works" );
+is( sayok($perl), "ok\n",   "`$perl rel2abs2rel$$.pl` works" );
 
 $perl = File::Spec->canonpath($perl);
-ok( sayok($perl), "ok\n",   "canonpath(rel2abs($^X)) = $perl" );
+is( sayok($perl), "ok\n",   "canonpath(rel2abs($^X)) = $perl" );
 
 $perl = safe_rel(File::Spec->abs2rel($perl));
-ok( sayok($perl), "ok\n",   "safe_rel(abs2rel(canonpath(rel2abs($^X)))) = $perl" );
+is( sayok($perl), "ok\n",   "safe_rel(abs2rel(canonpath(rel2abs($^X)))) = $perl" );
 
 $perl = safe_rel(File::Spec->canonpath($^X));
-ok( sayok($perl), "ok\n",   "safe_rel(canonpath($^X)) = $perl" );
+is( sayok($perl), "ok\n",   "safe_rel(canonpath($^X)) = $perl" );

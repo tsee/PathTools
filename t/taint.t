@@ -10,8 +10,7 @@ BEGIN {
 use Cwd;
 
 use strict;
-use Test;
-plan tests => 16;
+use Test::More tests => 16;
 use Scalar::Util qw/tainted/;
 
 my @Functions = qw(getcwd cwd fastcwd fastgetcwd
@@ -23,6 +22,6 @@ foreach my $func (@Functions) {
     no strict 'refs';
     my $cwd;
     eval { $cwd = &{'Cwd::'.$func} };
-    ok( $@, '',		  "$func() should not explode under taint mode" );
-    ok( tainted($cwd), 1, "its return value should be tainted" );
+    is( $@, '',		"$func() should not explode under taint mode" );
+    ok( tainted($cwd),	"its return value should be tainted" );
 }
