@@ -1,9 +1,16 @@
 Revision history for Perl distribution PathTools.
 
-3.0x
+3.02
 
  - Fixed a bug in which Cwd::abs_path() called on a file in the root
    directory returned strange results. [Bob Luckin]
+
+ - Straightened out the licensing details for the portion of the Cwd
+   module that comes from BSD sources. [Hugo van der Sanden]
+
+ - Removed the prototype from _perl_abs_path() and the XS version of
+   abs_path(), since all they seemed to be doing was causing people
+   grief, and since some platforms didn't have them anyway.
 
 3.01_03  (beta for upcoming 3.02)  Mon Nov 29 20:29:09 CST 2004
 

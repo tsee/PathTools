@@ -412,6 +412,7 @@ PPCODE:
 void
 abs_path(pathsv=Nullsv)
     SV *pathsv
+PROTOTYPE: DISABLE
 PPCODE:
 {
     dXSTARG;

@@ -472,7 +472,7 @@ sub chdir {
 }
 
 
-sub _perl_abs_path(;$)
+sub _perl_abs_path
 {
     my $start = @_ ? shift : '.';
     my($dotdots, $cwd, @pst, @cst, $dir, @tst);
