@@ -17,12 +17,14 @@ use File::Path;
 use lib File::Spec->catdir('t', 'lib');
 use Test::More;
 
-my $tests = 27;
+my $tests = 28;
 # _perl_abs_path() currently only works when the directory separator
 # is '/', so don't test it when it won't work.
 my $EXTRA_ABSPATH_TESTS = ($Config{prefix} =~ m/\//);
 $tests += 4 if $EXTRA_ABSPATH_TESTS;
 plan tests => $tests;
+
+like $INC{'Cwd.pm'}, qr{blib}i, "Cwd should be loaded from blib/ during testing";
 
 my $IsVMS = $^O eq 'VMS';
 my $IsMacOS = $^O eq 'MacOS';

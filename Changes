@@ -5,6 +5,10 @@ Revision history for Perl distribution PathTools.
  - Fixed a testing error if the first file we find in the root
    directory is a symlink. [Blair Zajac]
 
+ - Added a test to make sure Cwd.pm is loaded from blib/ during
+   testing, which seems to be an issue in some people's environments
+   and makes it awfully hard to debug things on my end.
+
 3.02  Sun Jan  9 19:29:52 CST 2005
 
  - Fixed a bug in which Cwd::abs_path() called on a file in the root
