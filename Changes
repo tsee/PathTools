@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.02
+3.02  (Pending, in beta)
 
  - Sometimes getdcwd() returns a lower-case drive letter, so don't
    require an upper-case letter in t/win32.t. [Jan Dubois]
