@@ -199,15 +199,17 @@ if ($^O eq 'os2') {
     return 1;
 }
 
-
-if ( $] >= 5.006 ) {
-  require XSLoader;
-  XSLoader::load( __PACKAGE__, $VERSION );
-} else {
-  require DynaLoader;
-  push @ISA, 'DynaLoader';
-  __PACKAGE__->bootstrap( $VERSION );
-}
+# If loading the XS stuff doesn't work, we can fall back to pure perl
+eval {
+  if ( $] >= 5.006 ) {
+    require XSLoader;
+    XSLoader::load( __PACKAGE__, $VERSION );
+  } else {
+    require DynaLoader;
+    push @ISA, 'DynaLoader';
+    __PACKAGE__->bootstrap( $VERSION );
+  }
+};
 
 # Must be after the DynaLoader stuff:
 $VERSION = eval $VERSION;
@@ -582,7 +584,9 @@ sub fast_abs_path {
 	    return fast_abs_path($link_target);
 	}
 	
-	return $dir eq File::Spec->rootdir
+	my $tdir = $dir;
+	$tdir =~ s!\\!/!g if $^O eq 'MSWin32';
+	return $tdir eq File::Spec->rootdir
 	  ? File::Spec->catpath($vol, $dir, $file)
 	  : fast_abs_path(File::Spec->catpath($vol, $dir, '')) . '/' . $file;
     }
