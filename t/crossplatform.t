@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 use strict;
-use Test::More;
+use Test;
 use File::Spec;
 local $|=1;
 
@@ -23,7 +23,14 @@ my %other_vols = (
 		  VMS => 'w',
 	      );
 
-ok 1, "Loaded";
+ok 1, 1, "Loaded";
+
+sub skip_subtests {
+  my ($msg, $number) = @_;
+  skip "skip $msg", 1 for 1..$number;
+  local $^W = 0;
+  last SKIP;
+}
 
 foreach my $platform (@platforms) {
   my $module = "File::Spec::$platform";
@@ -32,7 +39,7 @@ foreach my $platform (@platforms) {
   {
     eval "require $module; 1";
 
-    skip "Can't load $module", $tests_per_platform
+    skip_subtests "Can't load $module", $tests_per_platform
       if $@;
     
     my $v = $volumes{$platform} || '';
@@ -51,40 +58,40 @@ foreach my $platform (@platforms) {
     $base = $module->catpath($v, $module->catdir('', 'foo'), '');
     $base = $module->catdir($module->rootdir, 'foo');
 
-    is $module->file_name_is_absolute($base), 1, "$base is absolute on $platform";
+    ok $module->file_name_is_absolute($base), 1, "$base is absolute on $platform";
 
 
     # abs2rel('A:/foo/bar', 'A:/foo')    ->  'bar'
     $file = $module->catpath($v, $module->catdir($module->rootdir, 'foo', 'bar'), 'file');
     $base = $module->catpath($v, $module->catdir($module->rootdir, 'foo'), '');
     $result = $module->catfile('bar', 'file');
-    is $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
+    ok $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
     
     # abs2rel('A:/foo/bar', 'B:/foo')    ->  'A:/foo/bar'
     $base = $module->catpath($other_v, $module->catdir($module->rootdir, 'foo'), '');
     $result = volumes_differ($module, $file, $base) ? $file : $module->catfile('bar', 'file');
-    is $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
+    ok $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
 
     # abs2rel('A:/foo/bar', '/foo')      ->  'A:/foo/bar'
     $base = $module->catpath('', $module->catdir($module->rootdir, 'foo'), '');
     $result = volumes_differ($module, $file, $base) ? $file : $module->catfile('bar', 'file');
-    is $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
+    ok $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
 
     # abs2rel('/foo/bar', 'A:/foo')    ->  '/foo/bar'
     $file = $module->catpath('', $module->catdir($module->rootdir, 'foo', 'bar'), 'file');
     $base = $module->catpath($v, $module->catdir($module->rootdir, 'foo'), '');
     $result = volumes_differ($module, $file, $base) ? $file : $module->catfile('bar', 'file');
-    is $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
+    ok $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
     
     # abs2rel('/foo/bar', 'B:/foo')    ->  '/foo/bar'
     $base = $module->catpath($other_v, $module->catdir($module->rootdir, 'foo'), '');
     $result = volumes_differ($module, $file, $base) ? $file : $module->catfile('bar', 'file');
-    is $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
+    ok $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
     
     # abs2rel('/foo/bar', '/foo')      ->  'bar'
     $base = $module->catpath('', $module->catdir($module->rootdir, 'foo'), '');
     $result = $module->catfile('bar', 'file');
-    is $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
+    ok $module->abs2rel($file, $base), $result, "$platform->abs2rel($file, $base)";
   }
 }
 

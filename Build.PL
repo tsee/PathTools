@@ -61,7 +61,6 @@ my $build = $class->new
 		     },
    build_requires => {
 		      'File::Path' => 0,
-		      'Test::More' => 0,
 		      'Test' => 0,
 		      'Scalar::Util' => 0,
 		      'Module::Build' => '0.19',

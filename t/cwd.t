@@ -14,9 +14,9 @@ use warnings;
 use File::Spec;
 use File::Path;
 
-use Test::More;
+use Test;
 
-my $tests = 24;
+my $tests = 27;
 my $EXTRA_ABSPATH_TESTS = $ENV{PERL_CORE} || $ENV{TEST_PERL_CWD_CODE};
 # _perl_abs_path() currently only works when the directory separator
 # is '/', so don't test it when it won't work.
@@ -28,10 +28,13 @@ my $IsVMS = $^O eq 'VMS';
 my $IsMacOS = $^O eq 'MacOS';
 
 # check imports
-can_ok('main', qw(cwd getcwd fastcwd fastgetcwd));
-ok( !defined(&chdir),           'chdir() not exported by default' );
-ok( !defined(&abs_path),        '  nor abs_path()' );
-ok( !defined(&fast_abs_path),   '  nor fast_abs_path()');
+foreach (qw(cwd getcwd fastcwd fastgetcwd)) {
+  no strict;
+  ok defined(&$_), 1, "&$_ is exported";
+}
+ok( !defined(&chdir),         1,  'chdir() not exported by default' );
+ok( !defined(&abs_path),      1,  '  nor abs_path()' );
+ok( !defined(&fast_abs_path), 1,  '  nor fast_abs_path()');
 
 
 # XXX force Cwd to bootsrap its XSUBs since we have set @INC = "../lib"
@@ -57,8 +60,8 @@ if ($^O eq 'MSWin32') {
 $pwd_cmd =~ s=\\=/=g if ($^O eq 'dos');
 
 SKIP: {
-    skip "No native pwd command found to test against", 4 unless $pwd_cmd;
-
+    skip_subtests("No native pwd command found to test against", 4) unless $pwd_cmd;
+    
     print "# native pwd = '$pwd_cmd'\n";
 
     local @ENV{qw(PATH IFS CDPATH ENV BASH_ENV)};
@@ -70,8 +73,8 @@ SKIP: {
     # DCL SHOW DEFAULT has leading spaces
     $start =~ s/^\s+// if $IsVMS;
     SKIP: {
-        skip("'$pwd_cmd' failed, nothing to test against", 4) if $?;
-        skip("/afs seen, paths unlikely to match", 4) if $start =~ m|/afs/|;
+        skip_subtests("'$pwd_cmd' failed, nothing to test against", 4) if $?;
+        skip_subtests("/afs seen, paths unlikely to match", 4) if $start =~ m|/afs/|;
 
 	# Darwin's getcwd(3) (which Cwd.xs:bsd_realpath() uses which
 	# Cwd.pm:getcwd uses) has some magic related to the PWD
@@ -93,10 +96,10 @@ SKIP: {
 	my $fastcwd    = fastcwd;
 	my $fastgetcwd = fastgetcwd;
 
-	is($cwd,        $start, 'cwd()');
-	is($getcwd,     $start, 'getcwd()');
-	is($fastcwd,    $start, 'fastcwd()');
-	is($fastgetcwd, $start, 'fastgetcwd()');
+	ok($cwd,        $start, 'cwd()');
+	ok($getcwd,     $start, 'getcwd()');
+	ok($fastcwd,    $start, 'fastcwd()');
+	ok($fastgetcwd, $start, 'fastgetcwd()');
     }
 }
 
@@ -108,7 +111,7 @@ Cwd::chdir $Test_Dir;
 
 foreach my $func (qw(cwd getcwd fastcwd fastgetcwd)) {
   my $result = eval "$func()";
-  is $@, '';
+  ok $@, '';
   dir_ends_with( $result, $Test_Dir, "$func()" );
 }
 
@@ -133,11 +136,11 @@ rmtree($test_dirs[0], 0, 0);
 	       $IsMacOS ? qr|\bt:$| :
 			  qr|\bt$| );
   
-  like($ENV{PWD}, $check);
+  ok($ENV{PWD}, $check);
 }
 
 SKIP: {
-    skip "no symlinks on this platform", 2+$EXTRA_ABSPATH_TESTS unless $Config{d_symlink};
+    skip_subtests("no symlinks on this platform", 2+$EXTRA_ABSPATH_TESTS) unless $Config{d_symlink};
 
     mkpath([$Test_Dir], 0, 0777);
     symlink $Test_Dir, "linktest";
@@ -146,9 +149,9 @@ SKIP: {
     my $fast_abs_path =  Cwd::fast_abs_path("linktest");
     my $want          =  File::Spec->catdir("t", $Test_Dir);
 
-    like($abs_path,      qr|$want$|);
-    like($fast_abs_path, qr|$want$|);
-    like(Cwd::_perl_abs_path("linktest"), qr|$want$|) if $EXTRA_ABSPATH_TESTS;
+    ok($abs_path,      qr|$want$|);
+    ok($fast_abs_path, qr|$want$|);
+    ok(Cwd::_perl_abs_path("linktest"), qr|$want$|) if $EXTRA_ABSPATH_TESTS;
 
     rmtree($test_dirs[0], 0, 0);
     unlink "linktest";
@@ -185,7 +188,7 @@ sub bracketed_form_dir {
 sub dir_ends_with {
   my ($dir, $expect) = (shift, shift);
   my $bracketed_expect = quotemeta bracketed_form_dir($expect);
-  like( bracketed_form_dir($dir), qr|$bracketed_expect$|i, (@_ ? shift : ()) );
+  ok( bracketed_form_dir($dir), qr|$bracketed_expect$|i, (@_ ? shift : ()) );
 }
 
 sub bracketed_form_path {
@@ -196,5 +199,11 @@ sub bracketed_form_path {
 sub path_ends_with {
   my ($dir, $expect) = (shift, shift);
   my $bracketed_expect = quotemeta bracketed_form_path($expect);
-  like( bracketed_form_path($dir), qr|$bracketed_expect$|i, (@_ ? shift : ()) );
+  ok( bracketed_form_path($dir), qr|$bracketed_expect$|i, (@_ ? shift : ()) );
+}
+
+sub skip_subtests {
+  my ($msg, $number) = @_;
+  skip "skip $msg", 1 for 1..$number;
+  last SKIP;
 }

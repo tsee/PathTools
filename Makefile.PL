@@ -14,7 +14,6 @@ WriteMakefile
                            'File::Path' => '0',
                            'Scalar::Util' => '0',
                            'Test' => '0',
-                           'Test::More' => '0',
                            'XSLoader' => '0'
                          },
           'INSTALLDIRS' => 'perl',
