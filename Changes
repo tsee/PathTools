@@ -1,5 +1,13 @@
 Revision history for Perl distribution PathTools.
 
+3.01  Mon Sep  6 22:28:06 CDT 2004
+
+ - Removed an unnecessary and confusing dependency on File::Spec from
+   the Makefile.PL and the Build.PL.
+
+ - Added a 'NAME' entry to the Makefile.PL, because otherwise it won't
+   even begin to work. [Reported by many]
+
 3.00  Thu Sep  2 22:15:07 CDT 2004
 
  - Merged Cwd and File::Spec into a single PathTools distribution.
