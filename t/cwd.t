@@ -17,12 +17,11 @@ use File::Path;
 use lib File::Spec->catdir('t', 'lib');
 use Test::More;
 
-my $tests = 25;
-my $EXTRA_ABSPATH_TESTS = $ENV{PERL_CORE} || $ENV{TEST_PERL_CWD_CODE} || 0;
+my $tests = 27;
 # _perl_abs_path() currently only works when the directory separator
 # is '/', so don't test it when it won't work.
-$EXTRA_ABSPATH_TESTS &&= $Config{prefix} =~ m/\//;
-$tests += 3 if $EXTRA_ABSPATH_TESTS;
+my $EXTRA_ABSPATH_TESTS = ($Config{prefix} =~ m/\//);
+$tests += 4 if $EXTRA_ABSPATH_TESTS;
 plan tests => $tests;
 
 my $IsVMS = $^O eq 'VMS';
@@ -181,6 +180,25 @@ path_ends_with(Cwd::abs_path($path), 'cwd.t', 'abs_path() can be invoked on a fi
 path_ends_with(Cwd::fast_abs_path($path), 'cwd.t', 'fast_abs_path() can be invoked on a file');
 path_ends_with(Cwd::_perl_abs_path($path), 'cwd.t', '_perl_abs_path() can be invoked on a file')
   if $EXTRA_ABSPATH_TESTS;
+
+
+  
+SKIP: {
+  my $file;
+  {
+    my $root = File::Spec->rootdir;
+    local *FH;
+    opendir FH, $root or skip("Can't opendir($root): $!", 2+$EXTRA_ABSPATH_TESTS);
+    ($file) = grep {-f $_} map File::Spec->catfile($root, $_), readdir FH;
+    closedir FH;
+  }
+  skip "No plain file in root directory to test with", 2+$EXTRA_ABSPATH_TESTS unless $file;
+  
+  is Cwd::abs_path($file), $file, 'abs_path() works on files in the root directory';
+  is Cwd::fast_abs_path($file), $file, 'fast_abs_path() works on files in the root directory';
+  is Cwd::_perl_abs_path($file), $file, '_perl_abs_path() works on files in the root directory'
+    if $EXTRA_ABSPATH_TESTS;
+}
 
 
 #############################################

@@ -502,7 +502,7 @@ sub _perl_abs_path(;$)
 	    return abs_path($link_target);
 	}
 	
-	return abs_path($dir) . '/' . $file;
+	return $dir ? abs_path($dir) . "/$file" : "/$file";
     }
 
     $cwd = '';
@@ -581,7 +581,9 @@ sub fast_abs_path {
 	    return fast_abs_path($link_target);
 	}
 	
-	return fast_abs_path(File::Spec->catpath($vol, $dir, '')) . '/' . $file;
+	return $dir eq File::Spec->rootdir
+	  ? File::Spec->catpath($vol, $dir, $file)
+	  : fast_abs_path(File::Spec->catpath($vol, $dir, '')) . '/' . $file;
     }
 
     local $ENV{PWD} = $ENV{PWD} || ''; # Guard against clobberage
