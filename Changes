@@ -14,6 +14,9 @@ Revision history for Perl distribution PathTools.
    won't be one, and looking for it can be extremely slow when lots of
    disks are mounted. [Several people, including Andrew Burke]
 
+ - Eliminated a multi-argument form of open() that was causing a
+   syntax error on older versions of perl. [Fixed by Michael Schwern]
+
 3.01  Mon Sep  6 22:28:06 CDT 2004
 
  - Removed an unnecessary and confusing dependency on File::Spec from
