@@ -158,7 +158,6 @@ use Exporter;
 use vars qw(@ISA @EXPORT @EXPORT_OK $VERSION);
 
 $VERSION = '3.01_02';
-$VERSION = eval $VERSION;
 
 @ISA = qw/ Exporter /;
 @EXPORT = qw(cwd getcwd fastcwd fastgetcwd);
@@ -196,6 +195,9 @@ if ( $] >= 5.006 ) {
   push @ISA, 'DynaLoader';
   __PACKAGE__->bootstrap( $VERSION );
 }
+
+# Must be after the DynaLoader stuff:
+$VERSION = eval $VERSION;
 
 # Big nasty table of function aliases
 my %METHOD_MAP =
