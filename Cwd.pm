@@ -459,8 +459,6 @@ sub chdir {
 }
 
 
-# In case the XS version doesn't load.
-*abs_path = \&_perl_abs_path unless defined &abs_path;
 sub _perl_abs_path(;$)
 {
     my $start = @_ ? shift : '.';
@@ -539,10 +537,6 @@ sub _perl_abs_path(;$)
 }
 
 
-# added function alias for those of us more
-# used to the libc function.  --tchrist 27-Jan-00
-*realpath = \&abs_path;
-
 my $Curdir;
 sub fast_abs_path {
     my $cwd = getcwd();
@@ -577,7 +571,7 @@ sub fast_abs_path {
 	return fast_abs_path(File::Spec->catpath($vol, $dir, '')) . '/' . $file;
     }
 
-    local $ENV{PWD} = $ENV{PWD}; # Guard against clobberage
+    local $ENV{PWD} = $ENV{PWD} || ''; # Guard against clobberage
     if (!CORE::chdir($path)) {
  	_croak("Cannot chdir to $path: $!");
     }
@@ -688,5 +682,11 @@ if (exists $METHOD_MAP{$^O}) {
   }
 }
 
+# In case the XS version doesn't load.
+*abs_path = \&_perl_abs_path unless defined &abs_path;
+
+# added function alias for those of us more
+# used to the libc function.  --tchrist 27-Jan-00
+*realpath = \&abs_path;
 
 1;
