@@ -192,7 +192,7 @@ if ( $] >= 5.006 ) {
   XSLoader::load( __PACKAGE__, $VERSION );
 } else {
   require DynaLoader;
-  @ISA = 'DynaLoader';
+  push @ISA, 'DynaLoader';
   __PACKAGE__->bootstrap( $VERSION );
 }
 
