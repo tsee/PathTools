@@ -10,6 +10,10 @@ Revision history for Perl distribution PathTools.
  - Added a copy of ppport.h to the distribution to aid compilation on
    older versions of perl. [Suggested by Charlie Root]
 
+ - Don't bother looking for a 'pwd' executable on MSWin32 - there
+   won't be one, and looking for it can be extremely slow when lots of
+   disks are mounted. [Several people, including Andrew Burke]
+
 3.01  Mon Sep  6 22:28:06 CDT 2004
 
  - Removed an unnecessary and confusing dependency on File::Spec from
