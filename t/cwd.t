@@ -14,6 +14,7 @@ use Config;
 use File::Spec;
 use File::Path;
 
+use lib File::Spec->catdir('t', 'lib');
 use Test::More;
 
 my $tests = 25;

@@ -6,7 +6,10 @@ BEGIN {
     }
 }
 
+use File::Spec;
+use lib File::Spec->catdir('t', 'lib');
 use Test::More;
+
 if( $^O eq 'MSWin32' ) {
   plan tests => 3;
 } else {
