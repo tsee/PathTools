@@ -16,6 +16,7 @@ use File::Path;
 
 use lib File::Spec->catdir('t', 'lib');
 use Test::More;
+require VMS::Filespec if $^O eq 'VMS';
 
 my $tests = 28;
 # _perl_abs_path() currently only works when the directory separator
@@ -196,6 +197,7 @@ SKIP: {
   }
   skip "No plain file in root directory to test with", 2+$EXTRA_ABSPATH_TESTS unless $file;
   
+  $file = VMS::Filespec::rmsexpand($file) if $^O eq 'VMS';
   is Cwd::abs_path($file), $file, 'abs_path() works on files in the root directory';
   is Cwd::fast_abs_path($file), $file, 'fast_abs_path() works on files in the root directory';
   is Cwd::_perl_abs_path($file), $file, '_perl_abs_path() works on files in the root directory'

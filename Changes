@@ -6,6 +6,9 @@ Revision history for Perl distribution PathTools.
    doesn't accidentally pick it up and install it as a lib
    file. [Jerry Hedden]
 
+ - Fixed a testing error on VMS that occurred when a user had
+   read-access to the root of the current volume. [Craig A. Berry]
+
 3.03  Fri Jan 21 21:44:05 CST 2005
 
  - Fixed a testing error if the first file we find in the root
