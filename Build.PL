@@ -2,7 +2,7 @@ use Module::Build;
 
 my $class = Module::Build->subclass(code => <<'EOF');
 
-  # See https://rt.cpan.org/Ticket/Display.html?id=4681 for why we add
+  # See https://rt.cpan.org/NoAuth/Bug.html?id=4681 for why we add
   # this to the Makefile.PL:
   sub do_create_makefile_pl {
     my $self = shift;
@@ -53,11 +53,10 @@ my $build = $class->new
    dist_version_from => 'Cwd.pm',
    license => 'perl',
    installdirs => 'core',
-   create_makefile_pl => 'traditional',
+ #  create_makefile_pl => 'traditional',
    requires       => {
 		      'XSLoader' => 0,
 		      'Carp' => 0,
-		      'File::Spec' => 0,
 		      'File::Basename' => 0,
 		     },
    build_requires => {
