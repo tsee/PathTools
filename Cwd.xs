@@ -212,6 +212,25 @@ err2:
 #endif
 }
 
+#ifndef SV_CWD_RETURN_UNDEF
+#define SV_CWD_RETURN_UNDEF \
+sv_setsv(sv, &PL_sv_undef); \
+return FALSE
+#endif
+
+#ifndef OPpENTERSUB_HASTARG
+#define OPpENTERSUB_HASTARG     32      /* Called from OP tree. */
+#endif
+
+#ifndef dXSTARG
+#define dXSTARG SV * targ = ((PL_op->op_private & OPpENTERSUB_HASTARG) \
+                             ? PAD_SV(PL_op->op_targ) : sv_newmortal())
+#endif
+
+#ifndef XSprePUSH
+#define XSprePUSH (sp = PL_stack_base + ax - 1)
+#endif
+
 #ifndef getcwd_sv
 /* Taken from perl 5.8's util.c */
 #define getcwd_sv(a) Perl_getcwd_sv(aTHX_ a)
