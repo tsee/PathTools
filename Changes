@@ -2,6 +2,10 @@ Revision history for Perl distribution PathTools.
 
 3.01_01  (beta for upcoming 3.02)  Thu Nov 18 22:23:46 CST 2004
 
+ - Fixed a testing bug in which sometimes the wrong version of Cwd
+   (the version already installed on the user's machine) would get
+   loaded instead of the one we're building & installing.
+
  - Sometimes getdcwd() returns a lower-case drive letter, so don't
    require an upper-case letter in t/win32.t. [Jan Dubois]
 
