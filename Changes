@@ -1,6 +1,8 @@
 Revision history for Perl distribution PathTools.
 
-3.06
+3.06  Wed Apr 13 20:47:26 CDT 2005
+ 
+ (No changes in functionality)
 
  - Added a note to the canonpath() docs about why it doesn't collapse
    foo/../bar sections.
