@@ -1,5 +1,11 @@
 Revision history for Perl distribution PathTools.
 
+3.07
+
+ - We now avoid modifying @_ in tmpdir() when it's not strictly
+   necessary, which reportedly provides a modest performance
+   boost. [Richard Soderberg]
+
 3.06  Wed Apr 13 20:47:26 CDT 2005
  
  (No changes in functionality)
