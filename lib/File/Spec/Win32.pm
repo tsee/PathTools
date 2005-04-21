@@ -35,6 +35,9 @@ sub devnull {
     return "nul";
 }
 
+sub rootdir () { '\\' }
+
+
 =item tmpdir
 
 Returns a string representation of the first existing directory
