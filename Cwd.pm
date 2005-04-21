@@ -330,8 +330,9 @@ sub _backtick_pwd {
 unless ($METHOD_MAP{$^O}{cwd} or defined &cwd) {
     # The pwd command is not available in some chroot(2)'ed environments
     my $sep = $Config::Config{path_sep} || ':';
-    if( $^O eq 'MacOS' || (defined $ENV{PATH} &&
-			   $^O ne 'MSWin32' &&  # no pwd on Windows
+    my $os = $^O;  # Protect $^O from tainting
+    if( $os eq 'MacOS' || (defined $ENV{PATH} &&
+			   $os ne 'MSWin32' &&  # no pwd on Windows
 			   grep { -x "$_/pwd" } split($sep, $ENV{PATH})) )
     {
 	*cwd = \&_backtick_pwd;

@@ -2,6 +2,9 @@ Revision history for Perl distribution PathTools.
 
 3.07
 
+ - Fixed a bug in which the special perl variable $^O would become
+   tainted under certain versions of perl. [Michael Schwern]
+
  - We now avoid modifying @_ in tmpdir() when it's not strictly
    necessary, which reportedly provides a modest performance
    boost. [Richard Soderberg]
