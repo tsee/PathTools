@@ -12,6 +12,9 @@ Revision history for Perl distribution PathTools.
    necessary, which reportedly provides a modest performance
    boost. [Richard Soderberg]
 
+ - Made a couple of slight changes to the Win32 code so that it works
+   (or works better) on Symbian OS phones.  [Jarkko Hietaniemi]
+
 3.06  Wed Apr 13 20:47:26 CDT 2005
  
  (No changes in functionality)

@@ -47,12 +47,13 @@ from the following list:
     $ENV{TEMP}
     $ENV{TMP}
     SYS:/temp
+    C:\system\temp
     C:/temp
     /tmp
     /
 
-The SYS:/temp is preferred in Novell NetWare (the File::Spec::Win32
-is used also for NetWare).
+The SYS:/temp is preferred in Novell NetWare and the C:\system\temp
+for Symbian (the File::Spec::Win32 is used also for those platforms).
 
 Since Perl 5.8.0, if running under taint mode, and if the environment
 variables are tainted, they are not used.
@@ -64,6 +65,7 @@ sub tmpdir {
     return $tmpdir if defined $tmpdir;
     $tmpdir = $_[0]->_tmpdir( @ENV{qw(TMPDIR TEMP TMP)},
 			      'SYS:/temp',
+			      'C:\system\temp',
 			      'C:/temp',
 			      '/tmp',
 			      '/'  );
