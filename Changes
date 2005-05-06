@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.07
+3.07  Fri May  6 07:46:45 CDT 2005
 
  - Fixed a bug in which the special perl variable $^O would become
    tainted under certain versions of perl. [Michael Schwern]
