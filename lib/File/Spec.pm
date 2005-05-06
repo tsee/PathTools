@@ -3,7 +3,7 @@ package File::Spec;
 use strict;
 use vars qw(@ISA $VERSION);
 
-$VERSION = '3.06';
+$VERSION = '3.07';
 $VERSION = eval $VERSION;
 
 my %module = (MacOS   => 'Mac',
