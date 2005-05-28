@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.08
+3.08  Sat May 28 10:10:29 CDT 2005
 
  - Fixed a test failure with fast_abs_path() on Windows - it was
    sensitive to the rootdir() change from version 3.07. [Steve Hay]
