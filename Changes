@@ -1,5 +1,12 @@
 Revision history for Perl distribution PathTools.
 
+3.09
+
+ - Added some block delimiters (brackets) in the Perl_getcwd_sv() XS
+   function, which were necessary to separate the variable
+   declarations from the statements when HAS_GETCWD is not
+   defined. [Yves]
+
 3.08  Sat May 28 10:10:29 CDT 2005
 
  - Fixed a test failure with fast_abs_path() on Windows - it was
