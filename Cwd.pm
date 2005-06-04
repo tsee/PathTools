@@ -642,10 +642,7 @@ sub _win32_cwd {
     return $ENV{'PWD'};
 }
 
-*_NT_cwd = \&_win32_cwd if (!defined &_NT_cwd && 
-                            defined &Win32::GetCwd);
-
-*_NT_cwd = \&_os2_cwd unless defined &_NT_cwd;
+*_NT_cwd = defined &Win32::GetCwd ? \&_win32_cwd : \&_os2_cwd;
 
 sub _dos_cwd {
     if (!defined &Dos::GetCwd) {
