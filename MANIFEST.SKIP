@@ -12,3 +12,6 @@ CVS
 (^|/)\.
 ^lib/Cwd
 ^lib/ppp
+
+# Not ready yet:
+^Cwd-Win32\.xs$
