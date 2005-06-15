@@ -315,7 +315,10 @@ sub _croak { require Carp; Carp::croak(@_) }
 
 # The 'natural and safe form' for UNIX (pwd may be setuid root)
 sub _backtick_pwd {
-    local @ENV{qw(PATH IFS CDPATH ENV BASH_ENV)};
+    # Localize %ENV entries in a way that won't create new hash keys
+    my @localize = grep exists $ENV{$_}, qw(PATH IFS CDPATH ENV BASH_ENV);
+    local @ENV{@localize};
+    
     my $cwd = `$pwd_cmd`;
     # Belt-and-suspenders in case someone said "undef $/".
     local $/ = "\n";
