@@ -7,7 +7,7 @@ if ($] < 5.006 and Module::Build->y_n("Does your system define the getcwd() C li
 
 my $class = Module::Build->subclass(code => <<'EOF');
 
-  # See https://rt.cpan.org/NoAuth/Bug.html?id=4681 for why we add
+  # See http://rt.cpan.org/NoAuth/Bug.html?id=4681 for why we add
   # this to the Makefile.PL:
   sub do_create_makefile_pl {
     my $self = shift;
