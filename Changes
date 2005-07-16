@@ -1,5 +1,11 @@
 Revision history for Perl distribution PathTools.
 
+3.10
+
+ - eliminate_macros() and fixpath() in File::Spec::VMS are now
+   deprecated, since they are MakeMaker-specific and now live inside
+   MakeMaker. [Michael Schwern]
+
 3.09  Tue Jun 14 20:36:50 CDT 2005
 
  - Added some block delimiters (brackets) in the Perl_getcwd_sv() XS
