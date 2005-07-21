@@ -6,6 +6,10 @@ Revision history for Perl distribution PathTools.
    deprecated, since they are MakeMaker-specific and now live inside
    MakeMaker. [Michael Schwern]
 
+ - canonpath() on Win32 now collapses foo/.. (or foo\..) sections
+   correctly, rather than doing the misguided work it was previously
+   doing. [Michael Schwern]
+
 3.09  Tue Jun 14 20:36:50 CDT 2005
 
  - Added some block delimiters (brackets) in the Perl_getcwd_sv() XS

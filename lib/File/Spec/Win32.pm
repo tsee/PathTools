@@ -144,29 +144,7 @@ sub canonpath {
     $path =~ s{^\\\.\.$}{\\};                      # \..    -> \
     1 while $path =~ s{^\\\.\.}{};                 # \..\xx -> \xx
 
-    my ($vol,$dirs,$file) = $self->splitpath($path);
-    my @dirs = $self->splitdir($dirs);
-    my (@base_dirs, @path_dirs);
-    my $dest = \@base_dirs;
-    for my $dir (@dirs){
-	$dest = \@path_dirs if $dir eq $self->updir;
-	push @$dest, $dir;
-    }
-    # for each .. in @path_dirs pop one item from 
-    # @base_dirs
-    while (my $dir = shift @path_dirs){ 
-	unless ($dir eq $self->updir){
-	    unshift @path_dirs, $dir;
-	    last;
-	}
-	pop @base_dirs;
-    }
-    $path = $self->catpath( 
-			   $vol, 
-			   $self->catdir(@base_dirs, @path_dirs), 
-			   $file
-			  );
-    return $path;
+    return $self->_collapse($path);
 }
 
 =item splitpath

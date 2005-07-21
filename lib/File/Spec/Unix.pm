@@ -472,4 +472,40 @@ sub _cwd {
     Cwd::cwd();
 }
 
+
+# Internal method to reduce xx\..\yy -> yy
+sub _collapse {
+    my($fs, $path) = @_;
+
+    my $updir  = $fs->updir;
+    my $curdir = $fs->curdir;
+
+    my($vol, $dirs, $file) = $fs->splitpath($path);
+    my @dirs = $fs->splitdir($dirs);
+
+    my @collapsed;
+    push @collapsed, $curdir unless $fs->file_name_is_absolute($path);
+
+    foreach my $dir (@dirs) {
+        if( $dir eq $updir              and   # if we have an updir
+            @collapsed                  and   # and something to collapse
+            length $collapsed[-1]       and   # and its not the rootdir
+            $collapsed[-1] ne $updir    and   # nor another updir
+            $collapsed[-1] ne $curdir         # nor the curdir
+          ) 
+        {                                     # then
+            pop @collapsed;                   # collapse
+        }
+        else {                                # else
+            push @collapsed, $dir;            # just hang onto it
+        }
+    }
+
+    return $fs->catpath($vol,
+                        $fs->catdir(@collapsed),
+                        $file
+                       );
+}
+
+
 1;
