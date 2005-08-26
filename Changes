@@ -1,14 +1,15 @@
 Revision history for Perl distribution PathTools.
 
-3.10
+3.10  Thu Aug 25 21:52:22 CDT 2005
 
  - eliminate_macros() and fixpath() in File::Spec::VMS are now
    deprecated, since they are MakeMaker-specific and now live inside
    MakeMaker. [Michael Schwern]
 
  - canonpath() on Win32 now collapses foo/.. (or foo\..) sections
-   correctly, rather than doing the misguided work it was previously
-   doing. [Michael Schwern]
+   correctly, rather than doing the "misguided" work it was previously
+   doing.  Note that canonpath() on Unix still does NOT collapse these
+   sections, as doing so would be incorrect.  [Michael Schwern]
 
 3.09  Tue Jun 14 20:36:50 CDT 2005
 
