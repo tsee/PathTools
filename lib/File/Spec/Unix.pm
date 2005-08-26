@@ -59,7 +59,8 @@ sub canonpath {
     $path =~ s|/+|/|g;                             # xx////xx  -> xx/xx
     $path =~ s@(/\.)+(/|\Z(?!\n))@/@g;             # xx/././xx -> xx/xx
     $path =~ s|^(\./)+||s unless $path eq "./";    # ./xx      -> xx
-    $path =~ s|^/(\.\./)+|/|s;                     # /../../xx -> xx
+    $path =~ s|^/(\.\./)+|/|;                      # /../../xx -> xx
+    $path =~ s|^/\.\.$|/|;                         # /..       -> /
     $path =~ s|/\Z(?!\n)|| unless $path eq "/";          # xx/       -> xx
     return "$node$path";
 }
