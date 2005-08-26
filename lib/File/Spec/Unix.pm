@@ -485,8 +485,6 @@ sub _collapse {
     my @dirs = $fs->splitdir($dirs);
 
     my @collapsed;
-    push @collapsed, $curdir unless $fs->file_name_is_absolute($path);
-
     foreach my $dir (@dirs) {
         if( $dir eq $updir              and   # if we have an updir
             @collapsed                  and   # and something to collapse
