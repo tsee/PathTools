@@ -252,8 +252,9 @@ sub catpath {
 
     # If it's UNC, make sure the glue separator is there, reusing
     # whatever separator is first in the $volume
-    $volume .= $1
-        if ( $volume =~ m@^([\\/])[\\/][^\\/]+[\\/][^\\/]+\Z(?!\n)@s &&
+    my $v;
+    $volume .= $v
+        if ( (($v) = $volume =~ m@^([\\/])[\\/][^\\/]+[\\/][^\\/]+\Z(?!\n)@s) &&
              $directory =~ m@^[^\\/]@s
            ) ;
 
