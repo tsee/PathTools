@@ -127,7 +127,7 @@ On Win32 makes
 
 sub canonpath {
     my ($self,$path) = @_;
-    my $orig_path = $path;
+    
     $path =~ s/^([a-z]:)/\u$1/s;
     $path =~ s|/|\\|g;
     $path =~ s|([^\\])\\+|$1\\|g;                  # xx\\\\xx  -> xx\xx
