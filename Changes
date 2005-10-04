@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.12
+3.12  Mon Oct  3 22:09:12 CDT 2005
 
  - Fixed a testing error on OS/2 in which a drive letter for the root
    directory was confusing things. [Ilya Zakharevich]
