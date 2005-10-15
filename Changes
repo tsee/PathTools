@@ -1,5 +1,13 @@
 Revision history for Perl distribution PathTools.
 
+3.13
+
+ - Calling tmpdir() on Win32 had the unintended side-effect of storing
+   some undef values in %INC for the TMPDIR, TEMP, and TMP entries if
+   they didn't exist already.  This is probably a bug in perl itself
+   (submitted as #37441 on rt.perl.org), which we're now working
+   around. [Thomas L. Shinnick]
+
 3.12  Mon Oct  3 22:09:12 CDT 2005
 
  - Fixed a testing error on OS/2 in which a drive letter for the root

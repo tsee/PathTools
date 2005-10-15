@@ -63,7 +63,7 @@ variables are tainted, they are not used.
 my $tmpdir;
 sub tmpdir {
     return $tmpdir if defined $tmpdir;
-    $tmpdir = $_[0]->_tmpdir( @ENV{qw(TMPDIR TEMP TMP)},
+    $tmpdir = $_[0]->_tmpdir( map( $ENV{$_}, qw(TMPDIR TEMP TMP) ),
 			      'SYS:/temp',
 			      'C:\system\temp',
 			      'C:/temp',
