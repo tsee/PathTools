@@ -8,6 +8,9 @@ Revision history for Perl distribution PathTools.
    (submitted as #37441 on rt.perl.org), which we're now working
    around. [Thomas L. Shinnick]
 
+ - Integrated a change from bleadperl - a certain #ifdef in Cwd.xs
+   needs to apply to WIN32 but not WinCE. [Vadim Konovalov]
+
 3.12  Mon Oct  3 22:09:12 CDT 2005
 
  - Fixed a testing error on OS/2 in which a drive letter for the root
