@@ -2,11 +2,8 @@ use strict;
 use Test;
 
 # Grab all of the plain routines from File::Spec
-use File::Spec @File::Spec::EXPORT_OK ;
-
-use File::Spec::Unix ;
-use File::Spec::Win32 ;
-use Cwd;
+use File::Spec;
+use File::Spec::Win32;
 
 plan tests => 3;
 
