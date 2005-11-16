@@ -26,4 +26,5 @@ t/lib/Test/Tutorial.pod
 t/rel2abs2rel.t
 t/Spec.t
 t/taint.t
+t/tmpdir.t
 t/win32.t
