@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.13
+3.13  Tue Nov 15 23:50:37 CST 2005
 
  - Calling tmpdir() on Win32 had the unintended side-effect of storing
    some undef values in %INC for the TMPDIR, TEMP, and TMP entries if
