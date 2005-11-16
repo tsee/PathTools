@@ -353,52 +353,39 @@ Based on code written by Shigio Yamaguchi.
 
 sub abs2rel {
     my($self,$path,$base) = @_;
+    $base = $self->_cwd() unless defined $base and length $base;
 
-    # Clean up $path
-    if ( ! $self->file_name_is_absolute( $path ) ) {
-        $path = $self->rel2abs( $path ) ;
-    }
-    else {
-        $path = $self->canonpath( $path ) ;
-    }
+    for ($path, $base) { $_ = $self->canonpath($_) }
 
-    # Figure out the effective $base and clean it up.
-    if ( !defined( $base ) || $base eq '' ) {
-        $base = $self->_cwd();
-    }
-    elsif ( ! $self->file_name_is_absolute( $base ) ) {
-        $base = $self->rel2abs( $base ) ;
-    }
-    else {
-        $base = $self->canonpath( $base ) ;
-    }
+    my ($path_volume) = $self->splitpath($path, 1);
+    my ($base_volume) = $self->splitpath($base, 1);
+
+    # Can't relativize across volumes
+    return $path unless $path_volume eq $base_volume;
+
+    for ($path, $base) { $_ = $self->rel2abs($_) }
+
+    my $path_directories = ($self->splitpath($path, 1))[1];
+    my $base_directories = ($self->splitpath($base, 1))[1];
 
     # Now, remove all leading components that are the same
-    my @pathchunks = $self->splitdir( $path);
-    my @basechunks = $self->splitdir( $base);
+    my @pathchunks = $self->splitdir( $path_directories );
+    my @basechunks = $self->splitdir( $base_directories );
 
-    while (@pathchunks && @basechunks && $pathchunks[0] eq $basechunks[0]) {
+    while (@pathchunks && @basechunks && $self->_same($pathchunks[0], $basechunks[0])) {
         shift @pathchunks ;
         shift @basechunks ;
     }
-
-    $path = CORE::join( '/', @pathchunks );
-    $base = CORE::join( '/', @basechunks );
+    return $self->curdir unless @pathchunks || @basechunks;
 
     # $base now contains the directories the resulting relative path 
-    # must ascend out of before it can descend to $path_directory.  So, 
-    # replace all names with $parentDir
-    $base =~ s|[^/]+|..|g ;
+    # must ascend out of before it can descend to $path_directory.
+    my $result_dirs = $self->catdir( ($self->updir) x @basechunks, @pathchunks );
+    return $self->canonpath( $self->catpath('', $result_dirs, '') );
+}
 
-    # Glue the two together, using a separator if necessary, and preventing an
-    # empty result.
-    if ( $path ne '' && $base ne '' ) {
-        $path = "$base/$path" ;
-    } else {
-        $path = "$base$path" ;
-    }
-
-    return $self->canonpath( $path ) ;
+sub _same {
+  $_[1] eq $_[2];
 }
 
 =item rel2abs()

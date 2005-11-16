@@ -11,6 +11,12 @@ Revision history for Perl distribution PathTools.
  - Integrated a change from bleadperl - a certain #ifdef in Cwd.xs
    needs to apply to WIN32 but not WinCE. [Vadim Konovalov]
 
+ - abs2rel() used to return the empty string when its two arguments
+   were identical, which made no sense.  Now it returns
+   curdir(). [Spotted by David Golden]
+
+ - The Unix and Win32 implementations of abs2rel() have been unified.
+
 3.12  Mon Oct  3 22:09:12 CDT 2005
 
  - Fixed a testing error on OS/2 in which a drive letter for the root
