@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.14
+3.14  Thu Nov 17 18:08:44 CST 2005
 
  - canonpath() has some logic in it that avoids collapsing a
    //double/slash at the beginning of a pathname on platforms where
