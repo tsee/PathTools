@@ -1,5 +1,18 @@
 Revision history for Perl distribution PathTools.
 
+3.14
+
+ - canonpath() has some logic in it that avoids collapsing a
+   //double/slash at the beginning of a pathname on platforms where
+   that means something special.  It used to check the value of $^O
+   rather than the classname it was called as, which meant that
+   calling File::Spec::Cygwin->canonpath() didn't act like cygwin
+   unless you were actually *on* cygwin.  Now it does.
+
+ - Fixed a major bug on Cygwin in which catdir() could sometimes
+   create things that look like //network/paths in cases when it
+   shouldn't (e.g. catdir("/", "foo", "bar")).
+
 3.13  Tue Nov 15 23:50:37 CST 2005
 
  - Calling tmpdir() on Win32 had the unintended side-effect of storing

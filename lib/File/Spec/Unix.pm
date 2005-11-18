@@ -48,11 +48,12 @@ sub canonpath {
     # may be interpreted in an implementation-defined manner, although
     # more than two leading slashes shall be treated as a single slash.")
     my $node = '';
-    if ( $^O =~ m/^(?:qnx|nto|cygwin)$/ && $path =~ s:^(//[^/]+)(/|\z):/:s ) {
+    my $double_slashes_special = $self->isa("File::Spec::Cygwin") || $^O =~ m/^(?:qnx|nto)$/;
+    if ( $double_slashes_special && $path =~ s:^(//[^/]+)(/|\z):/:s ) {
       $node = $1;
     }
     # This used to be
-    # $path =~ s|/+|/|g unless($^O eq 'cygwin');
+    # $path =~ s|/+|/|g unless ($^O eq 'cygwin');
     # but that made tests 29, 30, 35, 46, and 213 (as of #13272) to fail
     # (Mainly because trailing "" directories didn't get stripped).
     # Why would cygwin avoid collapsing multiple slashes into one? --jhi
