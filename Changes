@@ -1,5 +1,13 @@
 Revision history for Perl distribution PathTools.
 
+3.15
+
+ - When searching for a 'pwd' executable in the $PATH, we now stop
+   after we find one rather than continuing the search.  We also avoid
+   the $PATH search altogether when a 'pwd' was already found in a
+   well-known and well-trusted location like /bin or /usr/bin . [Nick
+   Ing-Simmons]
+
 3.14  Thu Nov 17 18:08:44 CST 2005
 
  - canonpath() has some logic in it that avoids collapsing a

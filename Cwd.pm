@@ -302,6 +302,7 @@ foreach my $try ('/bin/pwd',
         last;
     }
 }
+my $found_pwd_cmd = defined($pwd_cmd);
 unless ($pwd_cmd) {
     # Isn't this wrong?  _backtick_pwd() will fail if somenone has
     # pwd in their path but it is not /bin/pwd or /usr/bin/pwd?
@@ -334,9 +335,19 @@ unless ($METHOD_MAP{$^O}{cwd} or defined &cwd) {
     # The pwd command is not available in some chroot(2)'ed environments
     my $sep = $Config::Config{path_sep} || ':';
     my $os = $^O;  # Protect $^O from tainting
-    if( $os eq 'MacOS' || (defined $ENV{PATH} &&
-			   $os ne 'MSWin32' &&  # no pwd on Windows
-			   grep { -x "$_/pwd" } split($sep, $ENV{PATH})) )
+
+
+    # Try again to find a pwd, this time searching the whole PATH.
+    if (defined $ENV{PATH} and $os ne 'MSWin32') {  # no pwd on Windows
+	my @candidates = split($sep, $ENV{PATH});
+	while (!$found_pwd_cmd and @candidates) {
+	    my $candidate = shift @candidates;
+	    $found_pwd_cmd = 1 if -x "$candidate/pwd";
+	}
+    }
+
+    # MacOS has some special magic to make `pwd` work.
+    if( $os eq 'MacOS' || $found_pwd_cmd )
     {
 	*cwd = \&_backtick_pwd;
     }
