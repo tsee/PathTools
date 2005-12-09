@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.15
+3.14_01
 
  - When searching for a 'pwd' executable in the $PATH, we now stop
    after we find one rather than continuing the search.  We also avoid
