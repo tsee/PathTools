@@ -2,11 +2,16 @@ Revision history for Perl distribution PathTools.
 
 3.14_01
 
- - When searching for a 'pwd' executable in the $PATH, we now stop
-   after we find one rather than continuing the search.  We also avoid
-   the $PATH search altogether when a 'pwd' was already found in a
-   well-known and well-trusted location like /bin or /usr/bin . [Nick
-   Ing-Simmons]
+ - The Cwd::getcwd() function on *nix is now a direct pass-through to
+   the underlying getcwd() C library function when possible.  This is
+   safer and faster than the previous implementation, which just did
+   abs_path('.'). [Suggested by Nick Ing-Simmons]
+
+ - When Cwd searches for a 'pwd' executable in the $PATH, we now stop
+   after we find the first one rather than continuing the search.  We
+   also avoid the $PATH search altogether when a 'pwd' was already
+   found in a well-known and well-trusted location like /bin or
+   /usr/bin. [Suggested by Nick Ing-Simmons]
 
  - On Win32 abs2rel($path, $base) was failing whenever $base is the
    root of a volume (such as C:\ or \\share\dir).  This has been

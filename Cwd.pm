@@ -35,7 +35,8 @@ absolute path of the current working directory.
 
 Returns the current working directory.
 
-Re-implements the getcwd(3) (or getwd(3)) functions in Perl.
+Exposes the POSIX function getcwd(3) or re-implements it if it's not
+available.
 
 =item cwd
 
@@ -359,16 +360,6 @@ unless ($METHOD_MAP{$^O}{cwd} or defined &cwd) {
 # set a reasonable (and very safe) default for fastgetcwd, in case it
 # isn't redefined later (20001212 rspier)
 *fastgetcwd = \&cwd;
-
-# By Brandon S. Allbery
-#
-# Usage: $cwd = getcwd();
-
-sub getcwd
-{
-    abs_path('.');
-}
-
 
 # By John Bazik
 #
