@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.14_01
+3.14_01  Fri Dec  9 22:45:49 CST 2005
 
  - The Cwd::getcwd() function on *nix is now a direct pass-through to
    the underlying getcwd() C library function when possible.  This is
