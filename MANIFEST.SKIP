@@ -15,3 +15,4 @@ CVS
 
 # Not ready yet:
 ^Cwd-Win32\.xs$
+^cwd-map\.
