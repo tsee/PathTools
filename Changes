@@ -5,6 +5,10 @@ Revision history for Perl distribution PathTools.
  - Updated to version 3.06 of ppport.h, which provides backward
    compatibility XS layers for older perl versions.
 
+ - Clarify in the docs for File::Spec's abs2rel() and rel2abs()
+   methods that the cwd() function it discusses is
+   Cwd::cwd(). [Spotted by Steven Lembark]
+
 3.15  Tue Dec 27 14:17:39 CST 2005
 
  - The Cwd::getcwd() function on *nix is now a direct pass-through to
