@@ -9,6 +9,13 @@ Revision history for Perl distribution PathTools.
    methods that the cwd() function it discusses is
    Cwd::cwd(). [Spotted by Steven Lembark]
 
+ - Apparently the version of File::Path that ships with perl 5.8.5
+   (and perhaps others) calls Cwd::getcwd() with an argument (perhaps
+   as a method?), which causes it to die with a prototyping error.
+   We've eliminated the prototype by using the "(...)" arglist, since
+   "PROTOTYPE: DISABLE" for the function didn't seem to work. [Spotted
+   by Eamon Daly and others]
+
 3.15  Tue Dec 27 14:17:39 CST 2005
 
  - The Cwd::getcwd() function on *nix is now a direct pass-through to
