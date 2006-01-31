@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.16
+3.16  Mon Jan 30 20:48:41 CST 2006
 
  - Updated to version 3.06 of ppport.h, which provides backward
    compatibility XS layers for older perl versions.
