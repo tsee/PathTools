@@ -1,5 +1,14 @@
 Revision history for Perl distribution PathTools.
 
+3.17
+
+ - The Cygwin version of Cwd::cwd() will croak if given any arguments
+   (which can happen if, for example, it's called as Cwd->cwd).  Since
+   that croaking is bad, we now wrap the original cwd() in a
+   subroutine that ignores its arguments.  We could skip this wrapping
+   if a future version of perl changes cygwin.c's cwd() to not barf
+   when fed an argument. [Jerry D. Hedden]
+
 3.16  Mon Jan 30 20:48:41 CST 2006
 
  - Updated to version 3.06 of ppport.h, which provides backward
