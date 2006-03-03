@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.17
+3.17  Fri Mar  3 16:52:30 CST 2006
 
  - The Cygwin version of Cwd::cwd() will croak if given any arguments
    (which can happen if, for example, it's called as Cwd->cwd).  Since
