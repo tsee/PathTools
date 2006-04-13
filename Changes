@@ -5,6 +5,9 @@ Revision history for Perl distribution PathTools.
  - Added a couple of regression tests to make sure abs2rel('/foo/bar',
    '/') works as expected.  [Chia-liang Kao]
 
+ - Added a couple of regression tests to make sure catdir('/',
+   'foo/bar') works as expected.  [Mark Grimes]
+
 3.17  Fri Mar  3 16:52:30 CST 2006
 
  - The Cygwin version of Cwd::cwd() will croak if given any arguments

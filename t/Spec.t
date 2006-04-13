@@ -90,6 +90,7 @@ if ($^O eq 'MacOS') {
 [ "Unix->catdir('d1','d2','d3','')",    'd1/d2/d3'  ],
 [ "Unix->catdir('','d1','d2','d3')",    '/d1/d2/d3' ],
 [ "Unix->catdir('d1','d2','d3')",       'd1/d2/d3'  ],
+[ "Unix->catdir('/','d2/d3')",          '/d2/d3'    ],
 
 [ "Unix->canonpath('///../../..//./././a//b/.././c/././')",   '/a/b/../c' ],
 [ "Unix->canonpath('')",                       ''               ],
@@ -600,6 +601,7 @@ if ($^O eq 'MacOS') {
 #[ "Epoc->canonpath('/.')",                                    '/'         ],
 
 [ "Cygwin->case_tolerant()",         '0'  ],
+[ "Cygwin->catdir('/','d2/d3')",     '/d2/d3'  ],
 
 ) ;
 
