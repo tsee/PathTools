@@ -279,6 +279,15 @@ if ($^O eq 'MacOS') {
 [ "VMS->catfile('c')",                 'c' ],
 [ "VMS->catfile('[]c')",               'c' ],
 
+[ "VMS->catfile('0','b','c')",     '[.0.b]c' ],
+[ "VMS->catfile('a','0','c')",     '[.a.0]c' ],
+[ "VMS->catfile('a','b','0')",     '[.a.b]0' ],
+[ "VMS->catfile('0','0','c')",     '[.0.0]c' ],
+[ "VMS->catfile('a','0','0')",     '[.a.0]0' ],
+[ "VMS->catfile('0','b','0')",     '[.0.b]0' ],
+[ "VMS->catfile('0','0','0')",     '[.0.0]0' ],
+
+
 [ "VMS->splitpath('file')",                                       ',,file'                                   ],
 [ "VMS->splitpath('[d1.d2.d3]')",                                 ',[d1.d2.d3],'                               ],
 [ "VMS->splitpath('[.d1.d2.d3]')",                                ',[.d1.d2.d3],'                              ],
