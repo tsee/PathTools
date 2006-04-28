@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.18
+3.18  Thu Apr 27 22:01:38 CDT 2006
 
  - Fixed some problems on VMS in which a directory called "0" would be
    treated as a second-class citizen. [Peter (Stig) Edwards]
