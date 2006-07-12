@@ -79,9 +79,11 @@ my $build = $class->new
 		      'Test' => 0,
 		      'Scalar::Util' => 0,
 		      'Module::Build' => '0.19',
+		      ($^O =~ /^(dos|MSWin32)$/ ? ('ExtUtils::Install' => 1.39) : ()),
 		     },
    xs_files       => { 'Cwd.xs' => 'lib/Cwd.xs' },
    extra_compiler_flags => \@compiler_flags,
+   dynamic_config => 1,  # Because of the $^O checking above
    sign => 1,
   );
 
