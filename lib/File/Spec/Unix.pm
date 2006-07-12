@@ -489,6 +489,7 @@ sub _collapse {
 
     my($vol, $dirs, $file) = $fs->splitpath($path);
     my @dirs = $fs->splitdir($dirs);
+    pop @dirs if @dirs && $dirs[-1] eq '';
 
     my @collapsed;
     foreach my $dir (@dirs) {
@@ -508,7 +509,6 @@ sub _collapse {
 
     return $fs->catpath($vol,
                         $fs->catdir(@collapsed),
-#                        @collapsed ? $fs->catdir(@collapsed) : $curdir,
                         $file
                        );
 }

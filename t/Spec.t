@@ -206,7 +206,6 @@ if ($^O eq 'MacOS') {
 [ "Win32->catdir('A:/d1','B:/d2','d3','')", 'A:\\d1\\B:\\d2\\d3' ],
 [ "Win32->catdir('A:/')",                   'A:\\'               ],
 [ "Win32->catdir('\\', 'foo')",             '\\foo'              ],
-[ "Win32->catdir('d1/../foo')",             'foo'                ],
 
 
 [ "Win32->catfile('a','b','c')",        'a\\b\\c' ],
@@ -239,6 +238,8 @@ if ($^O eq 'MacOS') {
 [ "Win32->canonpath('\\..\\')",         '\\'                  ],
 [ "Win32->canonpath('/../')",           '\\'                  ],
 [ "Win32->canonpath('/..\\')",          '\\'                  ],
+[ "Win32->canonpath('d1/../foo')",      'foo'                 ],
+
 [ "Win32->can('_cwd')",                 '/CODE/'              ],
 
 # FakeWin32 subclass (see below) just sets CWD to C:\one\two and getdcwd('D') to D:\alpha\beta

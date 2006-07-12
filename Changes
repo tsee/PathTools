@@ -14,6 +14,10 @@ Revision history for Perl distribution PathTools.
    to replace an in-use Cwd shared library, but previous versions
    don't. [Suggested by Adam Kennedy]
 
+ - Fixed File::Spec::Win32->canonpath('foo/../bar'), which was
+   returning \bar, and now properly returns just bar. [Spotted by
+   Heinrich Tegethoff]
+
 3.18  Thu Apr 27 22:01:38 CDT 2006
 
  - Fixed some problems on VMS in which a directory called "0" would be
