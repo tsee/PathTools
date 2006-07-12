@@ -1,6 +1,6 @@
 Revision history for Perl distribution PathTools.
 
-3.19
+3.19  Tue Jul 11 22:40:26 CDT 2006
 
  - When abs2rel() is called with two relative paths
    (e.g. abs2rel('foo/bar/baz', 'foo/bar')) the resolution algorithm
