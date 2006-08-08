@@ -1,5 +1,10 @@
 Revision history for Perl distribution PathTools.
 
+3.21  
+
+ - Added a bunch of X<> tags to the File::Spec docs to help
+   podindex. [Gabor Szabo]
+
 3.19  Tue Jul 11 22:40:26 CDT 2006
 
  - When abs2rel() is called with two relative paths
