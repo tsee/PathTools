@@ -2,8 +2,6 @@ Revision history for Perl distribution PathTools.
 
 3.21 - Wed Oct  4 21:16:43 2006
 
-3.21  Wed Oct  4 21:13:21 CDT 2006
-
  - Added a bunch of X<> tags to the File::Spec docs to help
    podindex. [Gabor Szabo]
 

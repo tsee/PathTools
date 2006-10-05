@@ -6,3 +6,5 @@ _build
 PathTools-*
 META.yml
 blibdirs
+Cwd-Win32.xs
+cwd-map.*
