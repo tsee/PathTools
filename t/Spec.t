@@ -272,6 +272,7 @@ if ($^O eq 'MacOS') {
 [ "FakeWin32->rel2abs('temp','C:/a/')",                     'C:\\a\\temp'                     ],
 [ "FakeWin32->rel2abs('../','C:/')",                        'C:\\'                            ],
 [ "FakeWin32->rel2abs('../','C:/a')",                       'C:\\'                            ],
+[ "FakeWin32->rel2abs('\\foo','C:/a')",                     'C:\\foo'                         ],
 [ "FakeWin32->rel2abs('temp','//prague_main/work/')",       '\\\\prague_main\\work\\temp'     ],
 [ "FakeWin32->rel2abs('../temp','//prague_main/work/')",    '\\\\prague_main\\work\\temp'     ],
 [ "FakeWin32->rel2abs('temp','//prague_main/work')",        '\\\\prague_main\\work\\temp'     ],

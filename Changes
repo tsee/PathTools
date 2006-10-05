@@ -11,6 +11,12 @@ Revision history for Perl distribution PathTools.
    path 'C:\one\two\t\foo'.  This is fixed. [Spotted by Alexandr
    Ciornii]
 
+ - On Win32, rel2abs() now always adds a volume (drive letter) if the
+   given path doesn't have a volume (drive letter or UNC volume).
+   Previously it could return a value that didn't have a volume if the
+   input was a semi-absolute path like /foo/bar instead of a
+   fully-absolute path like C:/foo/bar .
+
 3.19  Tue Jul 11 22:40:26 CDT 2006
 
  - When abs2rel() is called with two relative paths
