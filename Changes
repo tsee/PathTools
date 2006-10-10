@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+3.22 - Mon Oct  9 21:50:52 2006
+
+
 
  - Fixed the t/crossplatform.t test on Win32 (and possibly other
    volume-aware platforms) now that rel2abs() always adds a drive
