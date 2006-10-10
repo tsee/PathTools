@@ -1,5 +1,10 @@
 Revision history for Perl distribution PathTools.
 
+
+ - Fixed the t/crossplatform.t test on Win32 (and possibly other
+   volume-aware platforms) now that rel2abs() always adds a drive
+   letter. [Reported by several parties]
+
 3.21 - Wed Oct  4 21:16:43 2006
 
  - Added a bunch of X<> tags to the File::Spec docs to help
