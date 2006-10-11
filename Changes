@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+3.23 - Wed Oct 11 12:11:25 2006
+
  - Yet more Win32 fixes (sigh... seems like I'm fighting a neverending
    waterbed...).  This time, fixed file_name_is_absolute() to know
    what it's doing when the path includes a volume but a relative
