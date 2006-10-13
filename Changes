@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+ - Improved performance of canonpath() on Unix-ish platforms - on my
+   OS X laptop it looks like it's about twice as fast. [Ruslan Zakirov]
+
 3.23 - Wed Oct 11 12:11:25 2006
 
  - Yet more Win32 fixes (sigh... seems like I'm fighting a neverending
