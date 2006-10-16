@@ -1,5 +1,10 @@
 Revision history for Perl distribution PathTools.
 
+ - Add perl 5.005 to the list of requirements in the
+   Build.PL/Makefile.PL/META.yml.
+
+ - Add ExtUtils::CBuilder to the list of build_requires in Build.PL.
+
  - Improved performance of canonpath() on Unix-ish platforms - on my
    OS X laptop it looks like it's about twice as fast. [Ruslan Zakirov]
 

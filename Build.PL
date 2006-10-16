@@ -71,6 +71,7 @@ my $build = $class->new
    installdirs => 'core',
  #  create_makefile_pl => 'traditional',
    requires       => {
+		      'perl' => 5.005,
 		      'Carp' => 0,
 		      'File::Basename' => 0,
 		     },
@@ -79,6 +80,7 @@ my $build = $class->new
 		      'Test' => 0,
 		      'Scalar::Util' => 0,
 		      'Module::Build' => '0.19',
+		      'ExtUtils::CBuilder' => 0,
 		      ($^O =~ /^(dos|MSWin32)$/ ? ('ExtUtils::Install' => 1.39) : ()),
 		     },
    xs_files       => { 'Cwd.xs' => 'lib/Cwd.xs' },
