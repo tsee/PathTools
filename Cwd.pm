@@ -479,7 +479,9 @@ sub chdir {
 	return 1;
     }
 
-    if ($newdir =~ m#^/#s) {
+    if (ref $newdir eq 'GLOB') { # in case a file/dir handle is passed in
+	$ENV{'PWD'} = cwd();
+    } elsif ($newdir =~ m#^/#s) {
 	$ENV{'PWD'} = $newdir;
     } else {
 	my @curdir = split(m#/#,$ENV{'PWD'});
