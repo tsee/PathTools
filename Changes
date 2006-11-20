@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+3.24 - Sun Nov 19 22:52:49 2006
+
+
  - Fixed a bug in the $ENV{PWD}-updating of Cwd::chdir() when a
    dirhandle is passed in. [Steve Peters]
 
