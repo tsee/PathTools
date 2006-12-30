@@ -1,26 +1,37 @@
 #!/usr/bin/perl
 
+# A script to check a local copy against bleadperl, generating a blead
+# patch if they're out of sync.  An optional directory argument will
+# be chdir()-ed into before comparing.
 
-$_ = `diff -u lib/File/Spec.pm ~/Downloads/perl/bleadperl/lib/File/Spec.pm`;
-s/^Only in .* t\n//m;
-print;
+use strict;
+chdir shift() if @ARGV;
 
-$_ = `diff -u lib/File/Spec ~/Downloads/perl/bleadperl/lib/File/Spec`;
-s/^Only in .* t\n//m;
-print;
+my $blead = "~/Downloads/perl/bleadperl";
 
-$_ = `diff -u t ~/Downloads/perl/bleadperl/lib/File/Spec/t`;
-for my $x (qw{cwd.t lib taint.t win32.t}) {
-  s/^Only in .* $x\n//m;
+
+diff( "$blead/lib/File/Spec.pm", "lib/File/Spec.pm");
+
+diff( "$blead/lib/File/Spec", "lib/File/Spec",
+      qw(t) );
+
+diff( "$blead/lib/File/Spec/t", "t",
+      qw(cwd.t lib taint.t win32.t) );
+
+diff( "$blead/lib/Cwd.pm", "Cwd.pm" );
+
+diff( "$blead/ext/Cwd/Cwd.xs", "Cwd.xs" );
+
+diff( "$blead/ext/Cwd/t", "t",
+       qw(Functions.t Spec.t lib crossplatform.t rel2abs2rel.t tmpdir.t) );
+
+######################
+sub diff {
+  my ($first, $second, @skip) = @_;
+  local $_ = `diff -ur $first $second`;
+
+  for my $x (@skip) {
+    s/^Only in .* $x\n//m;
+  }
+  print;
 }
-print;
-
-print `diff -u Cwd.pm ~/Downloads/perl/bleadperl/lib/Cwd.pm`;
-
-print `diff -u Cwd.xs ~/Downloads/perl/bleadperl/ext/Cwd/Cwd.xs`;
-
-$_ = `diff -u t ~/Downloads/perl/bleadperl/ext/Cwd/t`;
-for my $x (qw{Functions.t Spec.t lib crossplatform.t rel2abs2rel.t tmpdir.t}) {
-  s/^Only in .* $x\n//m;
-}
-print;
