@@ -8,6 +8,11 @@ WriteMakefile
           'DISTNAME' => 'PathTools',
 	  'NAME' => 'Cwd',
           'VERSION_FROM' => 'Cwd.pm',
+	  (
+	   (grep { $_ eq 'PERL_CORE=1' } @ARGV)
+	   ? ('DEFINE' => '-DNO_PPPORT_H')
+	   : ()
+	  ),
           'PREREQ_PM' => {
                            'Carp' => '0',
                            'File::Basename' => '0',

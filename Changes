@@ -6,6 +6,9 @@ Revision history for Perl distribution PathTools.
  - Sync with a bleadperl change: miniperl can no longer use Win32::*
    functions because it cannot load Win32.dll. [Jan Dubois]
 
+ - We only need to load ppport.h when building outside the core, so we
+   avoid using it when in the core.
+ 
 3.24 - Sun Nov 19 22:52:49 2006
 
  - Fixed a bug in the $ENV{PWD}-updating of Cwd::chdir() when a
