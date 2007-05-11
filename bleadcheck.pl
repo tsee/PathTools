@@ -30,7 +30,7 @@ sub diff {
   my ($first, $second, @skip) = @_;
   local $_ = `diff -ur $first $second`;
 
-  for my $x (@skip) {
+  for my $x ('.svn', @skip) {
     s/^Only in .* $x\n//m;
   }
   print;
