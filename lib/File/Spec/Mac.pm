@@ -530,7 +530,7 @@ sub splitdir {
 	my @result = ();
 	my ($head, $sep, $tail, $volume, $directories);
 
-	return ('') if ( (!defined($path)) || ($path eq '') );
+	return @result if ( (!defined($path)) || ($path eq '') );
 	return (':') if ($path eq ':');
 
 	( $volume, $sep, $directories ) = $path =~ m|^((?:[^:]+:)?)(:*)(.*)|s;

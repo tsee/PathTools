@@ -260,6 +260,8 @@ Split dirspec using VMS syntax.
 
 sub splitdir {
     my($self,$dirspec) = @_;
+    my @dirs = ();
+    return @dirs if ( (!defined $dirspec) || ('' eq $dirspec) );
     $dirspec =~ tr/<>/[]/;			# < and >	==> [ and ]
     $dirspec =~ s/\]\[\./\.\]\[/g;		# ][.		==> .][
     $dirspec =~ s/\[000000\.\]\[/\[/g;		# [000000.][	==> [
@@ -274,7 +276,7 @@ sub splitdir {
 						# .--]		==> .-.-]
 						# [--]		==> [-.-]
     $dirspec = "[$dirspec]" unless $dirspec =~ /[\[<]/; # make legal
-    my(@dirs) = split('\.', vmspath($dirspec));
+    @dirs = split('\.', vmspath($dirspec));
     $dirs[0] =~ s/^[\[<]//s;  $dirs[-1] =~ s/[\]>]\Z(?!\n)//s;
     @dirs;
 }

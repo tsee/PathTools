@@ -1,5 +1,9 @@
 Revision history for Perl distribution PathTools.
 
+ - Fixed splitdir('') and splitdir(undef) and splitdir() to return an
+   empty list on VMS and MacOS, like it does on other platforms.
+   [Craig A. Berry]
+
 3.25 - Mon May 21 21:07:26 2007
 
  - Added a workaround for auto-vivication-of-function-args Perl bug
