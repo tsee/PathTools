@@ -39,6 +39,8 @@ and then File::Spec::Unix canonpath() is called on the result.
 
 sub canonpath {
     my($self,$path) = @_;
+    return unless defined $path;
+
     $path =~ s|\\|/|g;
 
     # Handle network path names beginning with double slash

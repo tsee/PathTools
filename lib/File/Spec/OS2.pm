@@ -54,6 +54,8 @@ sub catdir {
 
 sub canonpath {
     my ($self,$path) = @_;
+    return unless defined $path;
+
     $path =~ s/^([a-z]:)/\l$1/s;
     $path =~ s|\\|/|g;
     $path =~ s|([^/])/+|$1/|g;                  # xx////xx  -> xx/xx
