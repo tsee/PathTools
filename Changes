@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+ - Major fixes on Win32, including a rewrite of catdir(), catfile(),
+   and canonpath() in terms of a single body of code. [Heinrich Tegethoff]
+
  - canonpath() with no arguments and canonpath(undef) now consistently
    return undef on all platforms. [Spotted by Peter John Edwards]
 
