@@ -149,9 +149,11 @@ On Win32 makes
 sub canonpath {
     # Legacy / compatibility support
     #
-    return ""  if $_[1] eq "";
+    my $self = shift;
+    return undef unless @_ && defined($_[0]);
+    return ""  if $_[0] eq "";
 
-    return _canon_cat( $_[1] );
+    return _canon_cat( $_[0] );
 }
 
 =item splitpath
