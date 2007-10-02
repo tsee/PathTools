@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+ - Added lots more tests for Cygwin. [Reini Urban]
+
  - Major fixes on Win32, including a rewrite of catdir(), catfile(),
    and canonpath() in terms of a single body of code. [Heinrich Tegethoff]
 
