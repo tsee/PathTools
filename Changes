@@ -1,5 +1,14 @@
 Revision history for Perl distribution PathTools.
 
+ - For Win32 and Cygwin, case-tolerance can vary depending on the
+   volume under scrutiny.  When Win32API::File is available, it will
+   be employed to determine case-sensitivity of the given filesystem
+   (C: by default), otherwise we still return the default of 1. [Reini
+   Urban]
+
+ - On Cygwin, we added $ENV{'TMP'} and $ENV{'TEMP'} to the list of
+   possible places to look for tmpdir() return values. [Reini Urban]
+
  - Added lots more tests for Cygwin. [Reini Urban]
 
  - Major fixes on Win32, including a rewrite of catdir(), catfile(),
