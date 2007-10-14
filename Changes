@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+ - Major fixes on Win32, including a rewrite of catdir(), catfile(),
+   and canonpath() in terms of a single body of code. [Heinrich Tegethoff]
+
  - For Win32 and Cygwin, case-tolerance can vary depending on the
    volume under scrutiny.  When Win32API::File is available, it will
    be employed to determine case-sensitivity of the given filesystem
@@ -11,15 +14,15 @@ Revision history for Perl distribution PathTools.
 
  - Added lots more tests for Cygwin. [Reini Urban]
 
- - Major fixes on Win32, including a rewrite of catdir(), catfile(),
-   and canonpath() in terms of a single body of code. [Heinrich Tegethoff]
-
  - canonpath() with no arguments and canonpath(undef) now consistently
    return undef on all platforms. [Spotted by Peter John Edwards]
 
  - Fixed splitdir('') and splitdir(undef) and splitdir() to return an
    empty list on VMS and MacOS, like it does on other platforms.
    [Craig A. Berry]
+
+ - All .pm files now have the same $VERSION number, rather than a
+   hodgepodge of various numbers.
 
 3.25 - Mon May 21 21:07:26 2007
 
