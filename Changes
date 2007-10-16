@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+3.25_01 - Sat Oct 13 21:13:57 2007
+
  - Major fixes on Win32, including a rewrite of catdir(), catfile(),
    and canonpath() in terms of a single body of code. [Heinrich Tegethoff]
 
