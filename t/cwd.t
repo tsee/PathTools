@@ -135,16 +135,11 @@ foreach my $func (qw(cwd getcwd fastcwd fastgetcwd)) {
 # Cwd::chdir should also update $ENV{PWD}
 dir_ends_with( $ENV{PWD}, $Test_Dir, 'Cwd::chdir() updates $ENV{PWD}' );
 my $updir = File::Spec->updir;
-Cwd::chdir $updir;
-print "#$ENV{PWD}\n";
-Cwd::chdir $updir;
-print "#$ENV{PWD}\n";
-Cwd::chdir $updir;
-print "#$ENV{PWD}\n";
-Cwd::chdir $updir;
-print "#$ENV{PWD}\n";
-Cwd::chdir $updir;
-print "#$ENV{PWD}\n";
+
+for (1..@test_dirs) {
+  Cwd::chdir $updir;
+  print "#$ENV{PWD}\n";
+}
 
 rmtree($test_dirs[0], 0, 0);
 
@@ -168,23 +163,20 @@ rmtree($test_dirs[0], 0, 0);
 SKIP: {
     skip "no symlinks on this platform", 2+$EXTRA_ABSPATH_TESTS unless $Config{d_symlink};
 
+    my $file = "linktest";
     mkpath([$Test_Dir], 0, 0777);
-    symlink $Test_Dir, "linktest";
+    symlink $Test_Dir, $file;
 
-    my $abs_path      =  Cwd::abs_path("linktest");
-    my $fast_abs_path =  Cwd::fast_abs_path("linktest");
-    my $want          =  quotemeta(
-                             File::Spec->rel2abs(
-			         $ENV{PERL_CORE} ? $Test_Dir : File::Spec->catdir('t', $Test_Dir)
-                                                )
-                                  );
+    my $abs_path      =  Cwd::abs_path($file);
+    my $fast_abs_path =  Cwd::fast_abs_path($file);
+    my $want          =  quotemeta( File::Spec->rel2abs($Test_Dir) );
 
     like($abs_path,      qr|$want$|i);
     like($fast_abs_path, qr|$want$|i);
-    like(Cwd::_perl_abs_path("linktest"), qr|$want$|i) if $EXTRA_ABSPATH_TESTS;
+    like(Cwd::_perl_abs_path($file), qr|$want$|i) if $EXTRA_ABSPATH_TESTS;
 
     rmtree($test_dirs[0], 0, 0);
-    1 while unlink "linktest";
+    1 while unlink $file;
 }
 
 if ($ENV{PERL_CORE}) {
