@@ -694,6 +694,7 @@ if ($^O eq 'MacOS') {
 [ "Cygwin->rel2abs('..','/t1/t2/t3')",             '/t1/t2/t3/..'    ],
 [ "Cygwin->rel2abs('../t4','/t1/t2/t3')",          '/t1/t2/t3/../t4' ],
 [ "Cygwin->rel2abs('/t1','/t1/t2/t3')",            '/t1'             ],
+[ "Cygwin->rel2abs('//t1/t2/t3','/foo')",          '//t1/t2/t3'      ],
 
 ) ;
 
