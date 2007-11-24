@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+ - Reimplemented abs_path() on VMS to use
+   VMS::Filespec::vms_realpath() when it's available. [John E. Malmberg]
+
 3.25_01 - Sat Oct 13 21:13:57 2007
 
  - Major fixes on Win32, including a rewrite of catdir(), catfile(),
