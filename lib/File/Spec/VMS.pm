@@ -276,7 +276,8 @@ sub splitdir {
 						# .--]		==> .-.-]
 						# [--]		==> [-.-]
     $dirspec = "[$dirspec]" unless $dirspec =~ /[\[<]/; # make legal
-    @dirs = split('\.', vmspath($dirspec));
+    $dirspec =~ s/^(\[|<)\./$1/;
+    @dirs = split /(?<!\^)\./, vmspath($dirspec);
     $dirs[0] =~ s/^[\[<]//s;  $dirs[-1] =~ s/[\]>]\Z(?!\n)//s;
     @dirs;
 }
