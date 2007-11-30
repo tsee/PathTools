@@ -36,6 +36,8 @@ Removes redundant portions of file specifications according to VMS syntax.
 sub canonpath {
     my($self,$path) = @_;
 
+    return undef unless defined $path;
+
     if ($path =~ m|/|) { # Fake Unix
       my $pathify = $path =~ m|/\Z(?!\n)|;
       $path = $self->SUPER::canonpath($path);
