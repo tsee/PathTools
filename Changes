@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+ - abs_path() on Unix(ish) platforms has been upgraded to a much later
+   version of the underlying C code from BSD. [Michael Schwern]
+
  - Reimplemented abs_path() on VMS to use
    VMS::Filespec::vms_realpath() when it's available. [John E. Malmberg]
 

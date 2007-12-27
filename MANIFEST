@@ -16,6 +16,7 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml
 ppport.h
+t/abs_path.t
 t/crossplatform.t
 t/cwd.t
 t/Functions.t

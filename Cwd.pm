@@ -540,8 +540,8 @@ sub _perl_abs_path
 	local *PARENT;
 	unless (opendir(PARENT, $dotdots))
 	{
-	    _carp("opendir($dotdots): $!");
-	    return '';
+	    # probably a permissions issue.  Try the native command.
+	    return File::Spec->rel2abs( $start, _backtick_pwd() );
 	}
 	unless (@cst = stat($dotdots))
 	{
