@@ -644,6 +644,14 @@ sub _vms_cwd {
 
 sub _vms_abs_path {
     return $ENV{'DEFAULT'} unless @_;
+    my $path = shift;
+
+    if (-l $path) {
+        my $link_target = readlink($path);
+        die "Can't resolve link $path: $!" unless defined $link_target;
+	    
+        return _vms_abs_path($link_target);
+    }
 
     if (defined &VMS::Filespec::vms_realpath) {
         my $path = $_[0];
@@ -665,9 +673,9 @@ sub _vms_abs_path {
     # available.
 
     # may need to turn foo.dir into [.foo]
-    my $path = VMS::Filespec::pathify($_[0]);
-    $path = $_[0] unless defined $path;
-
+    my $pathified = VMS::Filespec::pathify($path);
+    $path = $pathified if defined $pathified;
+	
     return VMS::Filespec::rmsexpand($path);
 }
 

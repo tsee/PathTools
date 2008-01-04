@@ -7,7 +7,7 @@
 use strict;
 chdir shift() if @ARGV;
 
-my $blead = "~/Downloads/perl/bleadperl";
+my $blead = shift() || "~/Downloads/perl/bleadperl";
 
 
 diff( "$blead/lib/File/Spec.pm", "lib/File/Spec.pm");

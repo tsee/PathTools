@@ -476,7 +476,7 @@ L<File::Spec>
 # File::Spec subclasses use this.
 sub _cwd {
     require Cwd;
-    Cwd::cwd();
+    Cwd::getcwd();
 }
 
 
