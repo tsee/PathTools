@@ -112,9 +112,9 @@ Default: 1
 =cut
 
 sub case_tolerant () {
-  if ($^O ne 'cygwin') {
-    return 1;
-  }
+  return 1 unless $^O eq 'cygwin'
+    and defined &Cygwin::mount_flags;
+
   my $drive = shift;
   if (! $drive) {
       my @flags = split(/,/, Cygwin::mount_flags('/cygwin'));

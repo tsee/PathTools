@@ -1,5 +1,10 @@
 Revision history for Perl distribution PathTools.
 
+ - case_tolerant() on Cygwin will now avoid a painful death when
+   Cygwin::mount_flags() isn't defined, as is the case for perl <
+   5.10.  It will now just return 1, which is what it always did
+   before it got so smart. [Spotted by Emanuele Zeppieri]
+
  - abs_path() on Unix(ish) platforms has been upgraded to a much later
    version of the underlying C code from BSD. [Michael Schwern]
 
