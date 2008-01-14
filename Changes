@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+ - Upgraded to a newer version of ppport.h [Steve Peters]
+
 3.26 - Sun Jan 13 21:59:20 2008
 
  - case_tolerant() on Cygwin will now avoid a painful death when
