@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+3.26 - Sun Jan 13 21:59:20 2008
+
  - case_tolerant() on Cygwin will now avoid a painful death when
    Cygwin::mount_flags() isn't defined, as is the case for perl <
    5.10.  It will now just return 1, which is what it always did
