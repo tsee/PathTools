@@ -2,7 +2,8 @@
 #include "perl.h"
 #include "XSUB.h"
 #ifndef NO_PPPORT_H
-#   define NEED_sv_2pv_nolen
+#   define NEED_my_strlcpy
+#   define NEED_my_strlcat
 #   include "ppport.h"
 #endif
 
@@ -83,14 +84,14 @@ bsd_realpath(const char *path, char resolved[MAXPATHLEN])
 		if (path[1] == '\0')
 			return (resolved);
 		resolved_len = 1;
-		left_len = strlcpy(left, path + 1, sizeof(left));
+		left_len = my_strlcpy(left, path + 1, sizeof(left));
 	} else {
 		if (getcwd(resolved, MAXPATHLEN) == NULL) {
-			strlcpy(resolved, ".", MAXPATHLEN);
+			my_strlcpy(resolved, ".", MAXPATHLEN);
 		return (NULL);
 	}
 		resolved_len = strlen(resolved);
-		left_len = strlcpy(left, path, sizeof(left));
+		left_len = my_strlcpy(left, path, sizeof(left));
 	}
 	if (left_len >= sizeof(left) || resolved_len >= MAXPATHLEN) {
 		errno = ENAMETOOLONG;
@@ -147,7 +148,7 @@ bsd_realpath(const char *path, char resolved[MAXPATHLEN])
 		 * lstat() fails we still can return successfully if
 		 * there are no more path components left.
 	 */
-		resolved_len = strlcat(resolved, next_token, MAXPATHLEN);
+		resolved_len = my_strlcat(resolved, next_token, MAXPATHLEN);
 		if (resolved_len >= MAXPATHLEN) {
 			errno = ENAMETOOLONG;
 			return (NULL);
@@ -198,13 +199,13 @@ bsd_realpath(const char *path, char resolved[MAXPATHLEN])
 						symlink[slen] = '/';
 						symlink[slen + 1] = 0;
 	}
-					left_len = strlcat(symlink, left, sizeof(left));
+					left_len = my_strlcat(symlink, left, sizeof(left));
 					if (left_len >= sizeof(left)) {
 						errno = ENAMETOOLONG;
 						return (NULL);
 	}
 	}
-				left_len = strlcpy(left, symlink, sizeof(left));
+				left_len = my_strlcpy(left, symlink, sizeof(left));
 			}
 		}
 	#endif
