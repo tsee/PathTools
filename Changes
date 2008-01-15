@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+3.26_01
+
  - If strlcpy() and strlcat() aren't available on the user's system,
    we now use ppport.h to provide them, so our C code works. [Steve
    Peters]
