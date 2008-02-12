@@ -133,6 +133,11 @@ sub catfile {
     shift, return _canon_cat( "/", @_ )
 	if $_[0] eq "";
 
+    # Compatibility with File::Spec <= 3.26:
+    #     catfile('A:', 'foo') should return 'A:\foo'.
+    return _canon_cat( ($_[0].'\\'), @_[1..$#_] )
+        if $_[0] =~ m{^$DRIVE_RX\z}o;
+
     return _canon_cat( @_ );
 }
 
@@ -145,6 +150,11 @@ sub catdir {
     	unless @_;
     shift, return _canon_cat( "/", @_ )
 	if $_[0] eq "";
+
+    # Compatibility with File::Spec <= 3.26:
+    #     catdir('A:', 'foo') should return 'A:\foo'.
+    return _canon_cat( ($_[0].'\\'), @_[1..$#_] )
+        if $_[0] =~ m{^$DRIVE_RX\z}o;
 
     return _canon_cat( @_ );
 }

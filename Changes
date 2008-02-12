@@ -1,5 +1,11 @@
 Revision history for Perl distribution PathTools.
 
+ - Fixed an edge case for Win32 catdir('C:', 'foo') and catfile('C:',
+   'foo.txt') (which the caller's not really supposed to do, that's
+   what catpath() is for) that changed between versions.  Now we're
+   back to the old behavior, which was to return C:\foo and C:\foo.txt .
+   [Audrey Tang]
+
 3.27 - Wed Jan 16 20:20:49 2008
 
  - If strlcpy() and strlcat() aren't available on the user's system,
