@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+3.2701 - Mon Feb 11 21:43:51 2008
+
  - Fixed an edge case for Win32 catdir('C:', 'foo') and catfile('C:',
    'foo.txt') (which the caller's not really supposed to do, that's
    what catpath() is for) that changed between versions.  Now we're
