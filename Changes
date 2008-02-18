@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+ - The Makefile.PL now has 'use 5.005;' to explicitly show what
+   minimum version of perl we support. [Spotted by Alexandr Ciornii]
+
 3.2701 - Mon Feb 11 21:43:51 2008
 
  - Fixed an edge case for Win32 catdir('C:', 'foo') and catfile('C:',
