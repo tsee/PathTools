@@ -377,7 +377,8 @@ implementation of these methods, not the semantics.
 
 sub _canon_cat(@)				# @path -> path
 {
-    my $first  = shift;
+    my ($first, @rest) = @_;
+
     my $volume = $first =~ s{ \A ([A-Za-z]:) ([\\/]?) }{}x	# drive letter
     	       ? ucfirst( $1 ).( $2 ? "\\" : "" )
 	       : $first =~ s{ \A (?:\\\\|//) ([^\\/]+)
@@ -387,7 +388,7 @@ sub _canon_cat(@)				# @path -> path
 	       : $first =~ s{ \A [\\/] }{}x			# root dir
 	       ? "\\"
 	       : "";
-    my $path   = join "\\", $first, @_;
+    my $path   = join "\\", $first, @rest;
 
     $path =~ tr#\\/#\\\\#s;		# xx/yy --> xx\yy & xx\\yy --> xx\yy
 

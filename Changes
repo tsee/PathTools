@@ -1,5 +1,10 @@
 Revision history for Perl distribution PathTools.
 
+ - canonpath() and catdir() and catfile() on Win32 now make an
+   explicit (and unnecessary) copy of their arguments right away,
+   because apparently if we don't, we sabotage all of Win32dom. [RT
+   #33675]
+
  - The Makefile.PL now has 'use 5.005;' to explicitly show what
    minimum version of perl we support. [Spotted by Alexandr Ciornii]
 
