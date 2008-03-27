@@ -470,7 +470,7 @@ sub eliminate_macros {
 sub fixpath {
     my($self,$path,$force_path) = @_;
     return '' unless $path;
-    $self = bless {} unless ref $self;
+    $self = bless {}, $self unless ref $self;
     my($fixedpath,$prefix,$name);
 
     if ($path =~ /\s/) {

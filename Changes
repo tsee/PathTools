@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+ - Removed some function prototypes and other Perl::Critic violations.
+
  - canonpath() and catdir() and catfile() on Win32 now make an
    explicit (and unnecessary) copy of their arguments right away,
    because apparently if we don't, we sabotage all of Win32dom. [RT

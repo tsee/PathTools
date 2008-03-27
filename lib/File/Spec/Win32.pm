@@ -41,7 +41,7 @@ sub devnull {
     return "nul";
 }
 
-sub rootdir () { '\\' }
+sub rootdir { '\\' }
 
 
 =item tmpdir
@@ -87,7 +87,7 @@ Default: 1
 
 =cut
 
-sub case_tolerant () {
+sub case_tolerant {
   eval { require Win32API::File; } or return 1;
   my $drive = shift || "C:";
   my $osFsType = "\0"x256;
