@@ -375,7 +375,7 @@ implementation of these methods, not the semantics.
 =cut
 
 
-sub _canon_cat(@)				# @path -> path
+sub _canon_cat				# @path -> path
 {
     my ($first, @rest) = @_;
 

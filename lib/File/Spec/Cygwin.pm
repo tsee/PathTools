@@ -111,7 +111,7 @@ Default: 1
 
 =cut
 
-sub case_tolerant () {
+sub case_tolerant {
   return 1 unless $^O eq 'cygwin'
     and defined &Cygwin::mount_flags;
 
