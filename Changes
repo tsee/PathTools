@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+ - Fixed and clarified the behavior of splitpath() with a $no_file
+   argument on VMS.  [Craig A. Berry, Peter Edwards]
+
  - Removed some function prototypes and other Perl::Critic violations.
 
  - canonpath() and catdir() and catfile() on Win32 now make an
