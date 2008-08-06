@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+3.28_01 - Fri Jul 25 21:18:11 2008
+
  - Fixed and clarified the behavior of splitpath() with a $no_file
    argument on VMS.  [Craig A. Berry, Peter Edwards]
 
