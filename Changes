@@ -1,5 +1,7 @@
 Revision history for Perl distribution PathTools.
 
+3.28_02 - Mon Oct 27 20:13:11 2008
+
  - Fixed some issues on QNX/NTO related to paths with double
    slashes. [Matt Kraai & Nicholas Clark]
 
