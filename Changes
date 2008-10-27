@@ -1,5 +1,8 @@
 Revision history for Perl distribution PathTools.
 
+- In Cwd.pm, pass the un-munged $VERSION to XSLoader/DynaLoader,
+  otherwise development releases fail tests on Win32.
+
 3.28_02 - Mon Oct 27 20:13:11 2008
 
  - Fixed some issues on QNX/NTO related to paths with double
