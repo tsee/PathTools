@@ -62,6 +62,7 @@ my $class = Module::Build->subclass(code => <<'EOF');
 
 EOF
 
+
 my $build = $class->new
   (
    dist_name => 'PathTools',
