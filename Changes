@@ -1,5 +1,9 @@
 Revision history for Perl distribution PathTools.
 
+3.30_02 - Tue Sep 29 08:17:00 2009
+
+- Remove more special logic required for core perl.
+
 3.30_01 - Mon Sep 21 14:39:00 2009
 
 - Merge changes from core perl.
