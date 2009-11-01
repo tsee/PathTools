@@ -18,3 +18,6 @@ CVS
 ^Cwd-Win32\.xs$
 ^cwd-map\.
 ^t/abs_path.t$
+
+# Explicitly do not pack a Build.PL to avoid a circular dependency (ExtUtils::CBuilder)
+^Build.PL$
