@@ -1,5 +1,10 @@
 Revision history for Perl distribution PathTools.
 
+  Bug Fix
+  * Revert optimization introduced by [rt.perl.org 43633] which broke
+    File::Spec->rel2abs() when under a symlink [rt.cpan.org 47637].
+    Broke in 3.2501
+
 3.31 - Sun Nov  1 15:15:00 2009
 
 - Do not pack a Build.PL to avoid a circular dependency involving
