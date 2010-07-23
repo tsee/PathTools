@@ -1,6 +1,17 @@
 Revision history for Perl distribution PathTools.
 
+3.31_02 - Fri Jul 23 20:00:00 2010
+
 - Add TODO test for File::Spec->rel2abs() when under a symlink.
+- Make catpath return an empty directory rather than the current
+  directory if the directory name is empty.  This allows catpath
+  to play nice with non-rooted logical names, as in
+        catpath('sys$login:', '', 'login.com');
+  (Craig A. Berry)
+- Fix abs2rel bug in handling a Unix-style input.
+  (Craig A. Berry)
+- Assorted clarification and simplification of the documentation.
+  (Craig A. Berry)
 
 3.31 - Sun Nov  1 15:15:00 2009
 
