@@ -68,6 +68,7 @@ my $build = $class->new
    dist_name => 'PathTools',
    dist_abstract => 'Tools for working with paths and file specs across platforms',
    dist_version_from => 'Cwd.pm',
+   module_name => 'Cwd',
    license => 'perl',
    installdirs => 'core',
  #  create_makefile_pl => 'traditional',
@@ -87,7 +88,7 @@ my $build = $class->new
    xs_files       => { 'Cwd.xs' => 'lib/Cwd.xs' },
    extra_compiler_flags => \@compiler_flags,
    dynamic_config => 1,  # Because of the $^O checking above
-   sign => 1,
+   #sign => 1,
   );
 
 $build->create_build_script;
