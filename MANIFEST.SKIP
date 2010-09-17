@@ -20,3 +20,4 @@ CVS
 
 # Explicitly do not pack a Build.PL to avoid a circular dependency (ExtUtils::CBuilder)
 ^Build.PL$
+^MYMETA.yml$
