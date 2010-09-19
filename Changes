@@ -1,6 +1,11 @@
 Revision history for Perl distribution PathTools.
 
+3.32 - Sun Sep 19 18:00:00 2010
+
+- Promote to stable release.
+
 3.31_03 - Fri Sep 17 20:00:00 2010
+
 - Colon delimiter and escaped delimiters for File::Spec::VMS
   This is core change 61196b433b2b (Craig A. Berry)
 
