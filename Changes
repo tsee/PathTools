@@ -1,5 +1,11 @@
 Revision history for Perl distribution PathTools.
 
+3.33 - Mon Sep 20 18:00:00 2010
+- No functional changes since the previous release.
+- Fixes POD links
+  (part of core change2a6dc37471bea77f0c24fd1fe90c598a270c9968,
+   Florian Ragwitz)
+
 3.32 - Sun Sep 19 18:00:00 2010
 
 - Promote to stable release.
