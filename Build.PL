@@ -78,7 +78,7 @@ my $build = $class->new
 		      'File::Basename' => 0,
 		     },
    build_requires => {
-		      'File::Path' => 0,
+		      #'File::Path' => 0, # Ditched because of circular dependency and F::P goes back to 5.001
 		      'Test' => 0,
 		      'Scalar::Util' => 0,
 		      'Module::Build' => '0.19',
