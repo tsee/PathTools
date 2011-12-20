@@ -1,0 +1,23 @@
+^MANIFEST.
+^Makefile$
+^Build$
+^Makefile.old$
+^blib/
+^_build
+^pm_to_blib$
+CVS
+~$
+^PathTools
+(^|/)\.
+^lib/Cwd
+^lib/ppp
+^bleadcheck\.pl$
+
+# Not ready yet:
+^Cwd-Win32\.xs$
+^cwd-map\.
+^t/abs_path.t$
+
+# Explicitly do not pack a Build.PL to avoid a circular dependency (ExtUtils::CBuilder)
+^Build.PL$
+^MYMETA.yml$
