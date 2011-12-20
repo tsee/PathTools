@@ -11,3 +11,5 @@ MYMETA.*
 META.*
 Cwd.bs
 Cwd.c
+_build
+Build
