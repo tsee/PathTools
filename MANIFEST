@@ -25,6 +25,7 @@ t/lib/Test/Simple.pm
 t/lib/Test/Tutorial.pod
 t/rel2abs2rel.t
 t/rel2abs_vs_symlink.t
+t/Spec-taint.t
 t/Spec.t
 t/taint.t
 t/tmpdir.t

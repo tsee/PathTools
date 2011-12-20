@@ -12,6 +12,7 @@ CVS
 ^lib/Cwd
 ^lib/ppp
 ^bleadcheck\.pl$
+^Cwd\.(?:c|o|bs)$
 
 # Not ready yet:
 ^Cwd-Win32\.xs$
@@ -21,3 +22,4 @@ CVS
 # Explicitly do not pack a Build.PL to avoid a circular dependency (ExtUtils::CBuilder)
 ^Build.PL$
 ^MYMETA.yml$
+^MYMETA\.json$
