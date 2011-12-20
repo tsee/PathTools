@@ -1,5 +1,31 @@
 Revision history for Perl distribution PathTools.
 
+3.39_01 - Tue Dec 20 08:30:00 2011
+- [perl #51562] Problem & "solution" for building 5.10.0 with
+  win32+mingw+dmake (kmx)
+- Fix various compiler warnings from XS code (Zefram)
+- Fix typos (spelling errors) (Peter J. Acklam)
+- Remove Mac OS classic only tests from Cwd's Spec.t
+  and special case code from Cwd's cwd.t (Nicholas Clark)
+- Convert File::Spec's remaining tests to Test::More from Test
+  (Nicholas Clark)
+- dist/Cwd/lib/File/Spec/Win32.pm: Fix broken link (Karl Williamson)
+- In Cwd::_win32_cwd() avoid a string eval when checking if we're
+  miniperl (Nicholas Clark)
+- Add PERL_NO_GET_CONTEXT to Cwd (Nicholas Clark)
+- In Cwd.xs on VMS, don't compile bsd_realpath() at all (Nicholas Clark)
+- Merge the implementation of Cwd::{fastcwd,getcwd} using
+  ALIAS (Nicholas Clark)
+- In Cwd.xs, swap to defaulting to disabled prototypes (Nicholas Clark)
+- Remove duplicate $VERSION handling code, made redundant
+  in 3.28_01 (Nicholas Clark)
+- In Cwd.xs, tidy the conditional code related to symlinks
+  (Nicholas Clark)
+- Keep verbatim pod within 80 cols (Father Chrysostomos)
+- [RT #36079] Convert ` to ' in docs (Jim Keenan)
+- [rt.cpan.org #45885] File::Spec: Don’t use tainted tmpdir
+  in 5.6 (Father Chrysostomos)
+
 3.33 - Mon Sep 20 18:00:00 2010
 - No functional changes since the previous release.
 - Fixes POD links
