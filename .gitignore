@@ -13,3 +13,8 @@ Cwd.bs
 Cwd.c
 _build
 Build
+lib/Cwd.xs
+lib/Cwd.o
+lib/Cwd.c
+lib/ppport.h
+lib/Cwd.bs
