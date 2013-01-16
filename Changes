@@ -1,5 +1,18 @@
 Revision history for Perl distribution PathTools.
 
+3.40 - Wed Jan 16 07:30:00 2013
+- Stop inadvertently skipping Spec.t on VMS. (Craig Berry)
+- Rethink EFS in File::Spec::VMS. (Craig Berry)
+- File::Spec::UNIX->abs2rel() gets it wrong with ".." components
+  [perl #111510] (Volker Schatz)
+- Add C define to remove taint support from perl (Steffen Mueller)
+- Remove "register" declarations as they are no longer
+  useful (Karl Williamson)
+- Add test for fast_abs_path in LF dir
+  [perl #115962] (Father Chrysostomos)
+- Cwd::fast_abs_path's untaint should allow for multiline
+  directories (Joel Berger)
+
 3.39_01 - Tue Dec 20 08:30:00 2011
 - [perl #51562] Problem & "solution" for building 5.10.0 with
   win32+mingw+dmake (kmx)
