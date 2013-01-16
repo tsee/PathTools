@@ -171,7 +171,7 @@ use strict;
 use Exporter;
 use vars qw(@ISA @EXPORT @EXPORT_OK $VERSION);
 
-$VERSION = '3.39_01';
+$VERSION = '3.39_03';
 my $xs_version = $VERSION;
 $VERSION =~ tr/_//;
 
@@ -579,6 +579,7 @@ sub _perl_abs_path
 	unless (opendir(PARENT, $dotdots))
 	{
 	    # probably a permissions issue.  Try the native command.
+	    require File::Spec;
 	    return File::Spec->rel2abs( $start, _backtick_pwd() );
 	}
 	unless (@cst = stat($dotdots))
@@ -623,8 +624,8 @@ sub fast_abs_path {
 
     # Detaint else we'll explode in taint mode.  This is safe because
     # we're not doing anything dangerous with it.
-    ($path) = $path =~ /(.*)/;
-    ($cwd)  = $cwd  =~ /(.*)/;
+    ($path) = $path =~ /(.*)/s;
+    ($cwd)  = $cwd  =~ /(.*)/s;
 
     unless (-e $path) {
  	_croak("$path: No such file or directory");
