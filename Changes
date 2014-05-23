@@ -1,5 +1,12 @@
 Revision history for Perl distribution PathTools.
 
+3.47 - Fri May 23 18:52:00 2014
+- Improved Android support.
+- File::Spec::Unix->tmpdir: Always return an absolute path
+- File::Spec now has an XS version for performance.
+- QNX and VMS portability
+- tmpdir is updated when the environment changes.
+
 3.40 - Wed Jan 16 07:30:00 2013
 - Stop inadvertently skipping Spec.t on VMS. (Craig Berry)
 - Rethink EFS in File::Spec::VMS. (Craig Berry)
