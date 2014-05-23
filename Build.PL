@@ -4,6 +4,10 @@ my @compiler_flags;
 if ($] < 5.006 and Module::Build->y_n("Does your system define the getcwd() C library function?", 'y')) {
   @compiler_flags = ('-DHAS_GETCWD');
 }
+push @compiler_flags,
+  "-DDOUBLE_SLASHES_SPECIAL=@{[$^O eq q(qnx) || $^O eq q(nto) ? 1 : 0]}",
+  ((grep { $_ eq 'PERL_CORE=1' } @ARGV) ? '-DNO_PPPORT_H' : ());
+
 
 my $class = Module::Build->subclass(code => <<'EOF');
 

@@ -56,6 +56,11 @@ my @tests = (
 [ "Unix->catfile('./a','b','c')",       'a/b/c'  ],
 [ "Unix->catfile('c')",                 'c' ],
 [ "Unix->catfile('./c')",               'c' ],
+[ "Unix->catfile('a', 'b'.chr(0xaf))",         'a/b'.chr(0xaf)   ],
+($] >= 5.008 ? (
+[ "Unix->catfile('a', do { my \$x = 'b'.chr(0xaf); use utf8 (); utf8::upgrade(\$x); \$x })",   'a/b'.chr(0xaf)   ],
+) : ()),
+[ "Unix->catfile(substr('foo', 2))", 'o' ],
 
 [ "Unix->splitpath('file')",            ',,file'            ],
 [ "Unix->splitpath('/d1/d2/d3/')",      ',/d1/d2/d3/,'      ],
@@ -92,18 +97,48 @@ my @tests = (
 [ "Unix->catdir('d1','d2','d3','')",    'd1/d2/d3'  ],
 [ "Unix->catdir('','d1','d2','d3')",    '/d1/d2/d3' ],
 [ "Unix->catdir('d1','d2','d3')",       'd1/d2/d3'  ],
-[ "Unix->catdir('/','d2/d3')",          '/d2/d3'    ],
+# QNX is POSIXly special
+[ "Unix->catdir('/','d2/d3')",          ( $^O =~ m!^(nto|qnx)! ? '//d2/d3' : '/d2/d3' ) ],
+[ "Unix->catdir('a', 'b'.chr(0xaf))",         'a/b'.chr(0xaf)   ],
+($] >= 5.008 ? (
+[ "Unix->catdir('a', do { my \$x = 'b'.chr(0xaf); use utf8 (); utf8::upgrade(\$x); \$x })",   'a/b'.chr(0xaf)   ],
+) : ()),
 
 [ "Unix->canonpath('///../../..//./././a//b/.././c/././')",   '/a/b/../c' ],
 [ "Unix->canonpath('')",                       ''               ],
 # rt.perl.org 27052
 [ "Unix->canonpath('a/../../b/c')",            'a/../../b/c'    ],
+[ "Unix->canonpath('/')",                      '/'              ],
+[ "Unix->canonpath('///')",                    '/'              ],
 [ "Unix->canonpath('/.')",                     '/'              ],
 [ "Unix->canonpath('/./')",                    '/'              ],
+[ "Unix->canonpath('///.')",                   '/'              ],
+[ "Unix->canonpath('///.///')",                '/'              ],
+[ "Unix->canonpath('///..')",                  '/'              ],
+[ "Unix->canonpath('///..///')",               '/'              ],
+[ "Unix->canonpath('///..///.///..///')",      '/'              ],
+[ "Unix->canonpath('.')",                      '.'              ],
+[ "Unix->canonpath('.///')",                   '.'              ],
+[ "Unix->canonpath('.///.')",                  '.'              ],
+[ "Unix->canonpath('.///.///')",               '.'              ],
+[ "Unix->canonpath('..')",                     '..'             ],
+[ "Unix->canonpath('..///')",                  '..'             ],
+[ "Unix->canonpath('../..')",                  '../..'          ],
+[ "Unix->canonpath('../../')",                 '../..'          ],
+[ "Unix->canonpath('..///.///..///')",         '../..'          ],
+[ "Unix->canonpath('///../../..//./././a//b/.././c/././')",   '/a/b/../c' ],
+[ "Unix->canonpath('a/../../b/c')",            'a/../../b/c'    ],
+[ "Unix->canonpath('a///..///..///b////c')",   'a/../../b/c'    ],
+[ "Unix->canonpath('.///a///.///..///.///..///.///b///.////c///.')",   'a/../../b/c'    ],
 [ "Unix->canonpath('/a/./')",                  '/a'             ],
 [ "Unix->canonpath('/a/.')",                   '/a'             ],
 [ "Unix->canonpath('/../../')",                '/'              ],
 [ "Unix->canonpath('/../..')",                 '/'              ],
+[ "Unix->canonpath('/foo', '/bar')",           '/foo'           ],
+[ "Unix->canonpath('///a'.chr(0xaf))",         '/a'.chr(0xaf)   ],
+($] >= 5.008 ? (
+[ "Unix->canonpath(do { my \$x = '///a'.chr(0xaf); use utf8 (); utf8::upgrade(\$x); \$x })",   '/a'.chr(0xaf)   ],
+) : ()),
 
 [  "Unix->abs2rel('/t1/t2/t3','/t1/t2/t3')",          '.'                  ],
 [  "Unix->abs2rel('/t1/t2/t4','/t1/t2/t3')",          '../t4'              ],
@@ -289,7 +324,7 @@ my @tests = (
 
 [ "VMS->case_tolerant()",         '1'  ],
 
-[ "VMS->catfile('a','b','c')", $vms_unix_rpt ? 'a/b/c' : '[.a.b]c'  ],
+[ "VMS->catfile('a','b','c')",    $vms_unix_rpt ? 'a/b/c' : '[.a.b]c'  ],
 [ "VMS->catfile('a','b','[]c')",  $vms_unix_rpt ? 'a/b/c' : '[.a.b]c'  ],
 [ "VMS->catfile('[.a]','b','c')", $vms_unix_rpt ? 'a/b/c' : '[.a.b]c'  ],
 [ "VMS->catfile('a/b/','c')",     $vms_unix_rpt ? 'a/b/c' : '[.a.b]c'  ],
@@ -372,7 +407,7 @@ my @tests = (
 [ "VMS->catpath('node\"access_spec\"::volume:','[d1.d2.d3]','')",     'node"access_spec"::volume:[d1.d2.d3]'     ],
 [ "VMS->catpath('node\"access_spec\"::volume:','[d1.d2.d3]','file')", 'node"access_spec"::volume:[d1.d2.d3]file' ],
 
-[ "VMS->canonpath('')",                                    ''                        ],
+[ "VMS->canonpath('')",                                 ''                        ],
 [ "VMS->canonpath('volume:[d1]file')",                  $vms_unix_rpt ? '/volume/d1/file'               : 'volume:[d1]file'                ],
 [ "VMS->canonpath('volume:[d1.-.d2.][d3.d4.-]')",       $vms_unix_rpt ? '/volume/d2/d3/'               : 'volume:[d2.d3]'                  ],
 [ "VMS->canonpath('volume:[000000.d1]d2.dir;1')",       $vms_unix_rpt ? '/volume/d1/d2.dir.1'          : 'volume:[d1]d2.dir;1'             ],
@@ -449,7 +484,7 @@ my @tests = (
 [ "VMS->abs2rel('node::volume:[t1.t2.t4]','node::volume:[t1.t2.t3]')", $vms_unix_rpt ? '../t4/' : '[-.t4]' ],
 [ "VMS->abs2rel('node::volume:[t1.t2.t4]','[t1.t2.t3]')", $vms_unix_rpt ? '/node//volume/t1/t2/t4/' : 'node::volume:[t1.t2.t4]' ],
 [ "VMS->abs2rel('[t1.t2.t3]','[t1.t2.t3]')",              $vms_unix_rpt ? './' : '[]'             ],
-[  "VMS->abs2rel('[t1.t2.t3]file','[t1.t2.t3]')",          'file'             ],
+[ "VMS->abs2rel('[t1.t2.t3]file','[t1.t2.t3]')",          'file'                                  ],
 [ "VMS->abs2rel('[t1.t2.t3]file','[t1.t2]')",             $vms_unix_rpt ? 't3/file' : '[.t3]file' ],
 [ "VMS->abs2rel('v:[t1.t2.t3]file','v:[t1.t2]')",         $vms_unix_rpt ? 't3/file' : '[.t3]file' ],
 [ "VMS->abs2rel('[t1.t2.t4]','[t1.t2.t3]')",              $vms_unix_rpt ? '../t4/'  : '[-.t4]'    ],
@@ -467,6 +502,10 @@ my @tests = (
 [ "VMS->rel2abs('[-]','[t1.t2.t3]')",            $vms_unix_rpt ? '/sys$disk/t1/t2/'          : '[t1.t2]'          ],
 [ "VMS->rel2abs('[-.t4]','[t1.t2.t3]')",         $vms_unix_rpt ? '/sys$disk/t1/t2/t4/'       : '[t1.t2.t4]'       ],
 [ "VMS->rel2abs('[t1]','[t1.t2.t3]')",           $vms_unix_rpt ? '/sys$disk/t1/'             : '[t1]'             ],
+
+[ "VMS->file_name_is_absolute('foo:')",                '1'  ],
+[ "VMS->file_name_is_absolute('foo:bar.dat')",         '1'  ],
+[ "VMS->file_name_is_absolute('foo:[000000]bar.dat')", '1'  ],
 
 [ "OS2->case_tolerant()",         '1'  ],
 
@@ -796,5 +835,7 @@ for ( @tests ) {
 	}
     }
 }
+
+is +File::Spec::Unix->canonpath(), undef;
 
 done_testing();

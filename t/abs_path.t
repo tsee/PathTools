@@ -51,19 +51,22 @@ my %funcs = (
 for my $name (sort keys %funcs) {
     my $func = $funcs{$name};
 
-    TODO: {
-        local $TODO = 'Perl abs_path() doesn\'t pass tests yet';
-	like $func->(),         qr{\Q$test_path\E$}, "$name w/no args";
-	like $func->($sub_dir), qr{\Q$sub_path\E$},  "$name w/subdir";
-    }
+    like $func->(),         qr{\Q$test_path\E$}, "$name w/no args";
+    like $func->($sub_dir), qr{\Q$sub_path\E$},  "$name w/subdir";
     
     # All but the last component of pathname must exist when realpath()
     # is called. -- BSD realpath man page.
     my $dne_path = File::Spec->catdir($test_path, "dne");
-    TODO: {
-        local $TODO = 'Perl abs_path() does not work with a bogus sub file';
-        like $func->("dne"), qr{\Q$dne_path\E$}, 
-             "$name w/non-existant filename";
+    if ($name eq '_perl_abs_path') {
+        TODO: {
+            local $TODO = 'Perl abs_path() does not work with a bogus sub file';
+            like $func->("dne"), qr{\Q$dne_path\E$}, 
+                 "$name w/non-existant filename";
+        }
+    }
+    else {
+      like $func->("dne"), qr{\Q$dne_path\E$}, 
+           "$name w/non-existant filename";
     }
 
     my $double_dne = File::Spec->catdir("dne", "sub_dne");

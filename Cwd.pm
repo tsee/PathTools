@@ -171,7 +171,7 @@ use strict;
 use Exporter;
 use vars qw(@ISA @EXPORT @EXPORT_OK $VERSION);
 
-$VERSION = '3.40';
+$VERSION = '3.47';
 my $xs_version = $VERSION;
 $VERSION =~ tr/_//;
 
@@ -242,16 +242,18 @@ sub _vms_efs {
 
 
 # If loading the XS stuff doesn't work, we can fall back to pure perl
-eval {
-  if ( $] >= 5.006 ) {
-    require XSLoader;
-    XSLoader::load( __PACKAGE__, $xs_version);
-  } else {
-    require DynaLoader;
-    push @ISA, 'DynaLoader';
-    __PACKAGE__->bootstrap( $xs_version );
-  }
-};
+unless (defined &getcwd) {
+  eval {
+    if ( $] >= 5.006 ) {
+      require XSLoader;
+      XSLoader::load( __PACKAGE__, $xs_version);
+    } else {
+      require DynaLoader;
+      push @ISA, 'DynaLoader';
+      __PACKAGE__->bootstrap( $xs_version );
+    }
+  };
+}
 
 # Big nasty table of function aliases
 my %METHOD_MAP =
@@ -341,9 +343,26 @@ foreach my $try ('/bin/pwd',
         last;
     }
 }
+
+# Android has a built-in pwd. Using $pwd_cmd will DTRT if
+# this perl was compiled with -Dd_useshellcmds, which is the
+# default for Android, but the block below is needed for the
+# miniperl running on the host when cross-compiling, and
+# potentially for native builds with -Ud_useshellcmds.
+if ($^O =~ /android/) {
+    # If targetsh is executable, then we're either a full
+    # perl, or a miniperl for a native build.
+    if (-x $Config::Config{targetsh}) {
+        $pwd_cmd = "$Config::Config{targetsh} -c pwd"
+    }
+    else {
+        $pwd_cmd = "$Config::Config{sh} -c pwd"
+    }
+}
+
 my $found_pwd_cmd = defined($pwd_cmd);
 unless ($pwd_cmd) {
-    # Isn't this wrong?  _backtick_pwd() will fail if somenone has
+    # Isn't this wrong?  _backtick_pwd() will fail if someone has
     # pwd in their path but it is not /bin/pwd or /usr/bin/pwd?
     # See [perl #16774]. --jhi
     $pwd_cmd = 'pwd';
